@@ -1,6 +1,9 @@
- TP PostgreSQL – Gestion des utilisateurs et permissions (DCL)
+TP PostgreSQL – Gestion des utilisateurs et permissions (DCL)
+ 
 Massinissa Mameri
+
 300151841
+
 Ce TP nous guide à travers l’utilisation du DCL (Data Control Language) dans PostgreSQL afin de comprendre comment gérer les utilisateurs et leurs permissions sur une base de données.
 ________________________________________
 🎯 Objectifs
@@ -133,4 +136,5 @@ Dans PostgreSQL, les permissions peuvent être appliquées à différents niveau
 Base de données → accès à la base
 Schéma → accès aux objets
 Tables → opérations sur les données
+
 
