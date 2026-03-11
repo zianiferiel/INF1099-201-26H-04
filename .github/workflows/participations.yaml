@@ -10,13 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Install jq and PowerShell
-        run: |
-           brew install jq
-           brew install --cask powershell
-
       - name: Use jq
         run: echo '{"name":"GitHub"}' | jq '.name'
+
+      - name: Use PowerShell
+        run: pwsh --version
     
       - shell: bash
         run: |
