@@ -89,7 +89,7 @@ DQL.sql → vérification des données
 cd C:\Users\300150295\INF1099-201-26H-04\6.BATCH\300150295
 Get-ChildItem
 
-📷 Capture à ajouter :
+📷 Capture à ajouter : 
 
 images/structure-dossier.png
 2️⃣ Démarrer PostgreSQL avec Docker

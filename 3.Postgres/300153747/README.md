@@ -15,7 +15,7 @@ Ce projet démontre comment :
 L'objectif est de comprendre le déploiement d'une base de données conteneurisée et l'architecture client-serveur.
 
 📁 Structure du projet
-300153476/
+300153747/
 │
 ├── postgres-sakila-schema.sql
 ├── postgres-sakila-insert-data.sql
@@ -68,47 +68,28 @@ sql\dt
 SELECT COUNT(*) FROM film;
 SELECT COUNT(*) FROM actor;
 
-📸 Capture — Connexion psql et validation des tables :
-
-Afficher l'image
 
 🖥️ Configuration de pgAdmin 4
 Installation via Chocolatey
 powershellchoco install pgadmin4 -y
 
-📸 Capture — Installation de pgAdmin 4 via Chocolatey :
 
 Afficher l'image
 
 Lancement de pgAdmin 4
-
-📸 Capture — Page d'accueil de pgAdmin 4 :
 
 Afficher l'image
 
 Ajout du serveur PostgreSQL
 Onglet General — Nommer le serveur Postgres Docker :
 
-📸 Capture — Onglet General :
+
 
 Afficher l'image
 Onglet Connection — Paramètres de connexion :
 ChampValeurHostlocalhostPort5432DatabaseappdbUserpostgresPasswordpostgres
 
-📸 Capture — Onglet Connection :
-
-Afficher l'image
-
 Connexion confirmée — Dashboard pgAdmin
-
-📸 Capture — Dashboard avec les 21 tables Sakila visibles :
-
-Afficher l'image
-
-📸 Capture — Dashboard avec statistiques d'activité :
-
-Afficher l'image
-
 📊 Exemples de requêtes SQL
 Requêtes exécutées dans l'éditeur SQL de pgAdmin :
 sql-- Lister tous les acteurs
@@ -120,9 +101,6 @@ SELECT COUNT(*) FROM actor;
 -- Rechercher les films contenant "Star"
 SELECT title FROM film WHERE title ILIKE '%Star%';
 
-📸 Capture — Requêtes SQL dans le Query Tool de pgAdmin :
-
-Afficher l'image
 
 🧠 Concepts démontrés
 ConceptDétailDéploiement conteneuriséPostgreSQL 16 via Podman/DockerPersistance des donnéesVolume Docker monté sur le conteneurMapping de ports5432:5432 hôte → conteneurArchitecture client-serveurpgAdmin 4 ↔ PostgreSQLImport de base de donnéesScripts SQL schema + dataInterface graphiquepgAdmin 4 connecté au conteneurMode rootlessPodman sans privilèges root
@@ -136,4 +114,6 @@ les captures
 <img src="images/Screenshot 2026-02-21 204748.png" width="600">
 <img src="images/etape 4 prostgres.png" width="600">
 <img src="images/instalion de pgADmin.png" width="600">
+
+
 
