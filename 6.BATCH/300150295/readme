@@ -1,0 +1,43 @@
+> **Cours** : INF1099 - Administration des bases de données  
+> **Section** : 201-26H-04  
+> **Date** : 2026-03-11  
+> **Collège** : Collège Boréal
+
+---
+
+## 📋 Description
+
+Ce laboratoire démontre l'automatisation du chargement de scripts SQL dans PostgreSQL à l'aide de PowerShell et Docker.
+
+## 🗂️ Fichiers présents
+
+| Fichier | Type | Description |
+|---------|------|-------------|
+| `DDL.sql` | SQL | Création des tables (étudiants, cours, inscriptions) |
+| `DML.sql` | SQL | Insertion des données de test |
+| `DCL.sql` | SQL | Gestion des permissions (rôle lecteur_ecole) |
+| `DQL.sql` | SQL | Requêtes de vérification et statistiques |
+| `load-db.ps1` | PowerShell | Script d'automatisation avec logging |
+
+## 🚀 Utilisation
+
+```powershell
+# Exécuter le script d'automatisation
+.\load-db.ps1
+
+# Avec paramètres personnalisés
+.\load-db.ps1 -ContainerName "postgres-lab" -Database "ecole"
+📊 Ordre d'exécution
+plain
+Copy
+1. DDL.sql → Création de la structure
+2. DML.sql → Insertion des données  
+3. DCL.sql → Configuration des accès
+4. DQL.sql → Vérification des données
+✅ Résultat
+✅ Conteneur PostgreSQL démarré avec Docker
+✅ Base de données ecole créée
+✅ Tables peuplées avec données de test
+✅ Utilisateur lecteur_ecole avec droits limités
+✅ Logs d'exécution dans execution.log
+Réalisé dans le cadre du cours INF1099 - Collège Boréal
