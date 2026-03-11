@@ -10,8 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Install jq
-        run: brew install jq
+      - name: Install jq and PowerShell
+        run: |
+           brew install jq
+           brew install --cask powershell
 
       - name: Use jq
         run: echo '{"name":"GitHub"}' | jq '.name'
@@ -69,6 +71,9 @@ jobs:
           cd 5.ModelisationSQL
           bash .scripts/run.sh
           cd ..
+          ##
+          ## Evalaating PowerShell
+          ## pwsh --version
 
       - name: Commit files
         run: |
