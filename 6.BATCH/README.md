@@ -1,5 +1,7 @@
 # :test_tube: Laboratoire BATCH : 
 
+[:tada: Participation](.scripts/Participation.md)
+
 Script `Batch PowerShell` pour charger `PostgreSQL` avec `Docker`
 
 ## Objectifs
