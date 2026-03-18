@@ -1,6 +1,37 @@
 Chargement de la base de données...
-ERREUR : fichier DDL.sql introuvable
-ERREUR : fichier DML.sql introuvable
-ERREUR : fichier DCL.sql introuvable
-ERREUR : fichier DQL.sql introuvable
+Execution de DDL.sql
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "ecole" does not exist
+Execution de DML.sql
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
+Execution de DCL.sql
+CREATE ROLE
+CREATE ROLE
+ERROR:  database "reparation_smartphones" does not exist
+ERROR:  schema "boutique" does not exist
+ERROR:  schema "boutique" does not exist
+ERROR:  schema "boutique" does not exist
+ERROR:  schema "boutique" does not exist
+ERROR:  schema "boutique" does not exist
+DROP ROLE
+DROP ROLE
+Execution de DQL.sql
+ERROR:  relation "boutique.marque" does not exist
+LINE 1: SELECT * FROM boutique.Marque;
+                      ^
+ERROR:  relation "boutique.reparation" does not exist
+LINE 8: FROM boutique.Reparation r
+             ^
+ERROR:  relation "boutique.ligne_reparation" does not exist
+LINE 8: FROM boutique.Ligne_Reparation lr
+             ^
+ERROR:  relation "boutique.reparation" does not exist
+LINE 6: FROM boutique.Reparation r
+             ^
+ERROR:  relation "boutique.paiement" does not exist
+LINE 5: FROM boutique.Paiement p
+             ^
+ERROR:  relation "boutique.appareil" does not exist
+LINE 7: FROM boutique.Appareil a
+             ^
 Chargement terminé.

@@ -1,6 +1,25 @@
 Chargement de la base de données...
-ERREUR : fichier DDL.sql introuvable
-ERREUR : fichier DML.sql introuvable
-ERREUR : fichier DCL.sql introuvable
-ERREUR : fichier DQL.sql introuvable
+Execution de DDL.sql
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "ecole" does not exist
+Execution de DML.sql
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
+Execution de DCL.sql
+CREATE ROLE
+ERROR:  relation "vehicule" does not exist
+ERROR:  relation "transit" does not exist
+ERROR:  relation "vehicule" does not exist
+Execution de DQL.sql
+ERROR:  relation "vehicule" does not exist
+LINE 1: SELECT * FROM vehicule;
+                      ^
+ERROR:  relation "transit" does not exist
+LINE 2: FROM transit t
+             ^
+ERROR:  relation "paiement" does not exist
+LINE 2: FROM paiement
+             ^
+ERROR:  relation "port" does not exist
+LINE 2: FROM port p
+             ^
 Chargement terminé.

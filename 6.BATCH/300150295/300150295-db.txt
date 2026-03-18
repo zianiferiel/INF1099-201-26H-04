@@ -1,22 +1,22 @@
-[2026-03-18 22:02:11] [INFO] Conteneur: postgres-lab | Base: ecole | Utilisateur: postgres
-[2026-03-18 22:02:11] [INFO] V�rification du conteneur postgres-lab...
-[2026-03-18 22:02:11] [INFO] Conteneur actif detecte
-[2026-03-18 22:02:11] [INFO] Debut du chargement des scripts...
-[2026-03-18 22:02:11] [INFO] Traitement de DDL.sql...
-[2026-03-18 22:02:11] [ERROR] ERREUR: Fichier manquant - DDL.sql
-[2026-03-18 22:02:11] [INFO] Traitement de DML.sql...
-[2026-03-18 22:02:11] [ERROR] ERREUR: Fichier manquant - DML.sql
-[2026-03-18 22:02:11] [INFO] Traitement de DCL.sql...
-[2026-03-18 22:02:11] [ERROR] ERREUR: Fichier manquant - DCL.sql
-[2026-03-18 22:02:11] [INFO] Traitement de DQL.sql...
-[2026-03-18 22:02:11] [ERROR] ERREUR: Fichier manquant - DQL.sql
-[2026-03-18 22:02:11] [INFO] === RAPPORT FINAL ===
-[2026-03-18 22:02:11] [INFO] Scripts reussis: 0
-[2026-03-18 22:02:11] [INFO] Scripts en erreur: 4
-[2026-03-18 22:02:11] [INFO] Temps d'execution: 0.1441538 secondes
+[2026-03-18 18:20:51] [INFO] Conteneur: postgres-lab | Base: ecole | Utilisateur: postgres
+[2026-03-18 18:20:51] [INFO] V�rification du conteneur postgres-lab...
+[2026-03-18 18:20:51] [INFO] Conteneur actif detecte
+[2026-03-18 18:20:51] [INFO] Debut du chargement des scripts...
+[2026-03-18 18:20:51] [INFO] Traitement de DDL.sql...
+[2026-03-18 18:20:51] [ERROR] ERREUR SQL dans DDL.sql : psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory 	Is the server running locally and accepting connections on that socket?
+[2026-03-18 18:20:51] [INFO] Traitement de DML.sql...
+[2026-03-18 18:20:51] [INFO] SUCCES: DML.sql execute
+[2026-03-18 18:20:51] [INFO] Traitement de DCL.sql...
+[2026-03-18 18:20:51] [INFO] SUCCES: DCL.sql execute
+[2026-03-18 18:20:51] [INFO] Traitement de DQL.sql...
+[2026-03-18 18:20:51] [INFO] SUCCES: DQL.sql execute
+[2026-03-18 18:20:51] [INFO] === RAPPORT FINAL ===
+[2026-03-18 18:20:51] [INFO] Scripts reussis: 3
+[2026-03-18 18:20:51] [INFO] Scripts en erreur: 1
+[2026-03-18 18:20:51] [INFO] Temps d'execution: 0.729475 secondes
 
 Resume:
-- Succes: 0
-- Erreurs: 4
-- Duree: 0.1441538s
+- Succes: 3
+- Erreurs: 1
+- Duree: 0.729475s
 - Log: execution.log

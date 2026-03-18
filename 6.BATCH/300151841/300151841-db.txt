@@ -1,2 +1,58 @@
 Chargement de la base de donnees...
-ERREUR : fichier manquant : DDL.sql
+Execution de DDL.sql
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
+Execution de DML.sql
+ERROR:  relation "esport.game" does not exist
+LINE 1: INSERT INTO esport.game (game_name)
+                    ^
+ERROR:  relation "esport.tournament" does not exist
+LINE 1: INSERT INTO esport.tournament (tournament_name, start_date, ...
+                    ^
+ERROR:  relation "esport.team" does not exist
+LINE 1: INSERT INTO esport.team (team_name)
+                    ^
+ERROR:  relation "esport.player" does not exist
+LINE 1: INSERT INTO esport.player (pseudo, email)
+                    ^
+ERROR:  relation "esport.team_member" does not exist
+LINE 1: INSERT INTO esport.team_member (team_id, player_id)
+                    ^
+ERROR:  relation "esport.match" does not exist
+LINE 1: INSERT INTO esport.match (tournament_id, round, match_dateti...
+                    ^
+ERROR:  relation "esport.match_team" does not exist
+LINE 1: INSERT INTO esport.match_team (match_id, team_id, score)
+                    ^
+Execution de DCL.sql
+CREATE ROLE
+CREATE ROLE
+GRANT
+ERROR:  schema "esport" does not exist
+ERROR:  schema "esport" does not exist
+ERROR:  schema "esport" does not exist
+ERROR:  schema "esport" does not exist
+ERROR:  schema "esport" does not exist
+Execution de DQL.sql
+ERROR:  relation "esport.game" does not exist
+LINE 2: FROM esport.game;
+             ^
+ERROR:  relation "esport.tournament" does not exist
+LINE 7: FROM esport.tournament;
+             ^
+ERROR:  relation "esport.team" does not exist
+LINE 4: FROM esport.team;
+             ^
+ERROR:  relation "esport.player" does not exist
+LINE 5: FROM esport.player;
+             ^
+ERROR:  relation "esport.match" does not exist
+LINE 6: FROM esport.match m
+             ^
+ERROR:  relation "esport.match_team" does not exist
+LINE 5: FROM esport.match_team mt
+             ^
+ERROR:  relation "esport.team_member" does not exist
+LINE 6: FROM esport.team_member tm
+             ^
+Chargement termine.

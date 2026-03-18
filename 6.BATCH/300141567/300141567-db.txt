@@ -1,7 +1,37 @@
-
-    Directory: /home/runner/work/INF1099-201-26H-04/INF1099-201-26H-04/6.BATCH
-
-[32;1mUnixMode  [0m[32;1m       User[0m[32;1m Group     [0m[32;1m    LastWriteTime[0m[32;1m         Size[0m[32;1m Name[0m
-[32;1m--------  [0m [32;1m      ----[0m [32;1m-----     [0m [32;1m   -------------[0m [32;1m        ----[0m [32;1m----[0m
-drwxr-xr-x     runner runner     03/18/2026 22:01         4096 [44;1mlog[0m
-ERREUR : fichier manquant DDL.sql
+Execution de DDL.sql
+[31;1mpsql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory[0m
+[31;1m	Is the server running locally and accepting connections on that socket?[0m
+Execution de DML.sql
+[31;1mERROR:  relation "utilisateur" does not exist[0m
+[31;1mLINE 1: INSERT INTO utilisateur (nom, prenom, email)[0m
+[31;1m                    ERROR:[31;1mERROR:  relation "categorie" does not exist[0m
+[31;1mLINE 1: INSERT I                    ^
+ERROR:  relation "equipe" does not exis[LINE 1: INSERT INTO equipe (nom_equipe)
+                    ^
+ERROR:  relation "technicien" does not exist
+LINE 1: INSERT INTO technicien (nom, prenom, email, id_equipe)
+                    [ERROR:  relation "ticket" does not exist
+LINE 1: INSERT INTO ticket (titre, description, date_creation, id_ut...
+                    ^
+ERROR:  relation "intervention" does not exist
+LINE 1: INSERT INTO intervention (date_intervention, commentaire, id...
+                    ^
+1;1mERROR:  relation "intervention" does not exist[0m
+[31;1mLINE 1: INSERT INTO intervention (date_intervention, commentaire, id...[0m
+[31;1m                    ^[0m
+Execution de DCL.sql
+CREATE ROLE
+CREATE ROLE
+[31;1mERROR:  database "cours" does not existGRANTGRANT
+GRANT
+Execution de DQL.sql
+[31;1mERROR:  relation "ticket" does not exist[0m
+[31;1mLINE 1: SELECT * FROM ticket;[0m [31;1m                ERROR:  rela[31;1mERROR:  relation "tickLINE 2: FROM ticket t
+             ^
+ERROR:  relation "intervention" does not exis[LINE 2: FROM intervention i
+             ^
+ot exist[0m
+[31;1mLINE 2: FROM intervention i[0m
+[31;1m             ^[0m
+Base chargée avec succès
+Temps d'execution : 00:00:00.7974750

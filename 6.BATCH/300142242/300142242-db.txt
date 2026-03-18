@@ -1,0 +1,11 @@
+Execution de DDL.sql
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "ecole" does not exist
+Execution de DML.sql
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
+Execution de DCL.sql
+ERROR:  relation "etudiants" does not exist
+Execution de DQL.sql
+ERROR:  relation "etudiants" does not exist
+LINE 1: SELECT * FROM etudiants;
+                      ^

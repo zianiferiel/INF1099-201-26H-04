@@ -1,29 +1,46 @@
 #!/usr/bin/env pwsh
 
 # New function to test DB loading
-function Test-LoadDB($scriptPath) {
-    # Start Postgres container silently
+function Test-LoadDB($scriptPath, $StudentID) {
+
+    $ErrorActionPreference = "Stop"
+
     $existing = docker ps -a --filter "name=postgres-lab" --format "{{.Names}}"
-    if ($existing -ne "postgres-lab") {
-        docker run -d -q `
+
+    if (-not ($existing -contains "postgres-lab")) {
+        docker container run -d -q `
             --name postgres-lab `
             -e POSTGRES_PASSWORD=postgres `
             -e POSTGRES_DB=ecole `
             -p 5432:5432 `
             postgres | Out-Null
-        Start-Sleep -Seconds 10
+    }
+
+    # Attendre que Postgres soit prêt
+    for ($i=0; $i -lt 10; $i++) {
+        try {
+            docker exec postgres-lab pg_isready | Out-Null
+            break
+        } catch {
+            Start-Sleep -Seconds 1
+        }
     }
 
     try {
-        # Run student script silently
-        # pwsh $scriptPath *> $null
-        pwsh $scriptPath *> "$StudentID/$StudentID-db.txt"
+        Push-Location $StudentID
+
+        pwsh ./load-db.ps1 *> "$StudentID-db.txt"
+
+        Pop-Location
         return ":heavy_check_mark:"
-    } catch {
+    }
+    catch {
+        Pop-Location
         return ":x:"
-    } finally {
-        docker stop postgres-lab | Out-Null
-        docker rm postgres-lab | Out-Null
+    }
+    finally {
+        docker container stop postgres-lab | Out-Null
+        docker container rm postgres-lab | Out-Null
     }
 }
 
@@ -95,7 +112,7 @@ foreach ($entry in $STUDENTS) {
     $log = ":x:"  # default fail
 
     if (Test-Path $DBSCRIPT) {
-        $db = Test-LoadDB $DBSCRIPT
+        $db = Test-LoadDB $DBSCRIPT $StudentID
         $log = "[:wood:](../$StudentID/$StudentID-db.txt)"
     }
 
