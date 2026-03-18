@@ -24,16 +24,6 @@ Toutes les étapes du TP ont été complétées avec succès sur Windows avec Po
 
 ---
 
-## 📁 Structure du projet
-```
-C:\Users\diall\Downloads\INF1099\
-└── sakila-db\
-    ├── sakila-schema.sql
-    └── sakila-data.sql
-```
-
----
-
 ## 🚀 Étapes réalisées
 
 ### 1️⃣ Vérification de Podman
@@ -41,17 +31,18 @@ C:\Users\diall\Downloads\INF1099\
 Podman -v
 # podman version 5.7.1
 ```
-> ✅ Podman installé et fonctionnel.
+
+![Podman version 5.7.1](screenshots/podman_version.png)
 
 ---
 
 ### 2️⃣ Créer le dossier projet dans Downloads
 ```powershell
-# Créer le dossier INF1099 dans Downloads
 $projectDir = "$env:USERPROFILE\Downloads\INF1099"
 New-Item -ItemType Directory -Path $projectDir -Force
 ```
-> ✅ Dossier `C:\Users\diall\Downloads\INF1099` créé le 2026-01-28 à 4:09 PM.
+
+![Création du dossier INF1099](screenshots/fichier_sakila.png)
 
 ---
 
@@ -60,21 +51,22 @@ New-Item -ItemType Directory -Path $projectDir -Force
 Expand-Archive -Path "$env:USERPROFILE\Downloads\sakila-db.zip" `
                -DestinationPath $projectDir
 ```
-> ✅ Archive extraite dans `$projectDir\sakila-db`.
+
+![Décompression de sakila-db.zip](screenshots/decompression_sakila.png)
 
 ---
 
 ### 4️⃣ Configurer l'alias Docker → Podman
 ```powershell
-# Alias temporaire (session courante)
+# Alias temporaire
 Set-Alias docker podman
 
-# Alias permanent (ajouter dans $PROFILE)
+# Alias permanent — ajouter dans $PROFILE
 notepad $PROFILE
-# Ligne à ajouter :
 Set-Alias docker podman
 ```
-> ✅ `docker` redirige vers `podman` dans toute la session.
+
+![Configuration alias docker → podman](screenshots/file_docker.png)
 
 ---
 
@@ -84,7 +76,10 @@ podman machine start
 # Starting machine "podman-machine-default"
 # Machine "podman-machine-default" started successfully
 ```
-> ✅ Machine Podman démarrée. API Docker disponible sur `npipe:////./pipe/docker_engine`.
+
+![Démarrage de la machine Podman](screenshots/podman_start.png)
+
+> ✅ API Docker disponible sur `npipe:////./pipe/docker_engine`
 
 ---
 
@@ -96,38 +91,29 @@ docker run -d `
   -p 3306:3306 `
   mysql:8.0
 ```
-> ✅ Image `mysql:8.0` téléchargée depuis `docker.io/library/mysql:8.0`.  
-> ✅ Conteneur `INF1099-mysql` démarré sur le port `0.0.0.0:3306->3306/tcp`.
 
-Vérification :
+![Création du conteneur MySQL 8.0](screenshots/creation_du_conteneur_mysql.png)
+
+Vérification — conteneur actif :
 ```powershell
 docker ps
-# CONTAINER ID   IMAGE                        STATUS              NAMES
-# c35113e9974b   docker.io/library/mysql:8.0  Up About a minute   INF1099-mysql
 ```
+
+![Liste des conteneurs actifs](screenshots/liste_container.png)
+
+> ✅ `INF1099-mysql` tourne sur le port `0.0.0.0:3306->3306/tcp`
 
 ---
 
-### 7️⃣ Créer la base de données Sakila
+### 7️⃣ Créer la base de données Sakila + vérification
 ```powershell
 docker exec -it INF1099-mysql mysql -u root -p -e "CREATE DATABASE sakila;"
-# Enter password: rootpass
-```
-
-Vérification :
-```powershell
 docker exec -it INF1099-mysql mysql -u root -p -e "SHOW DATABASES;"
 ```
 
-| Database |
-|----------|
-| information_schema |
-| mysql |
-| performance_schema |
-| **sakila** |
-| sys |
+![Création de la base sakila et SHOW DATABASES](screenshots/cree_liste_database.png)
 
-> ✅ Base de données `sakila` créée avec succès.
+> ✅ Base `sakila` visible dans la liste aux côtés de `information_schema`, `mysql`, `performance_schema`, `sys`
 
 ---
 
@@ -139,6 +125,7 @@ docker exec -it INF1099-mysql `
 docker exec -it INF1099-mysql `
   mysql -u root -prootpass -e "GRANT ALL PRIVILEGES ON *.* TO 'etudiants'@'localhost' WITH GRANT OPTION;"
 ```
+
 > ✅ Utilisateur `etudiants` créé avec mot de passe `etudiants_1` et tous les privilèges.
 
 ---
@@ -149,69 +136,41 @@ docker exec -it INF1099-mysql `
 ```powershell
 Get-Content "$projectDir\sakila-db\sakila-schema.sql" |
   docker exec -i INF1099-mysql mysql -u root -prootpass sakila
-# mysql: [Warning] Using a password on the command line interface can be insecure.
 ```
+
+![Import du schéma Sakila](screenshots/copier_le_contente_de_sakila.png)
 
 **Données :**
 ```powershell
 Get-Content "$projectDir\sakila-db\sakila-data.sql" |
   docker exec -i INF1099-mysql mysql -u root -prootpass sakila
-# mysql: [Warning] Using a password on the command line interface can be insecure.
 ```
-> ✅ Schéma et données importés. L'avertissement de sécurité sur le mot de passe en ligne de commande est normal et attendu.
+
+![Import des données Sakila](screenshots/copy_contenu_des.png)
+
+> ✅ L'avertissement `Using a password on the command line interface can be insecure` est normal et attendu.
 
 ---
 
-### 🔟 Vérifier l'importation
+### 🔟 Vérification finale
 
-**Liste des tables :**
+**Liste des 23 tables :**
 ```powershell
 docker exec -it INF1099-mysql mysql -u etudiants -petudiants_1 `
   -e "USE sakila; SHOW TABLES;"
 ```
 
-<details>
-<summary>📋 Tables présentes dans sakila (cliquer pour voir)</summary>
+![Liste complète des tables Sakila](screenshots/fin_msql.png)
 
-| Tables_in_sakila |
-|-----------------|
-| actor |
-| actor_info |
-| address |
-| category |
-| city |
-| country |
-| customer |
-| customer_list |
-| film |
-| film_actor |
-| film_category |
-| film_list |
-| film_text |
-| inventory |
-| language |
-| nicer_but_slower_film_list |
-| payment |
-| rental |
-| sales_by_film_category |
-| sales_by_store |
-| staff |
-| staff_list |
-| store |
-
-</details>
-
-**Vérification du contenu :**
+**Comptage des acteurs :**
 ```powershell
 docker exec -it INF1099-mysql mysql -u root -prootpass `
   -e "SELECT COUNT(*) FROM sakila.actor;"
 ```
 
-| COUNT(*) |
-|----------|
-| **200** |
+![COUNT(*) FROM sakila.actor = 200](screenshots/resultat_copy.png)
 
-> ✅ 200 acteurs importés — base Sakila complète et opérationnelle.
+> ✅ **200 acteurs** importés — base Sakila complète et opérationnelle.
 
 ---
 
@@ -240,7 +199,7 @@ docker exec -it INF1099-mysql mysql -u root -prootpass `
 | Créer l'utilisateur `etudiants` avec privilèges | ✅ |
 | Importer le schéma Sakila | ✅ |
 | Importer les données Sakila | ✅ |
-| Vérifier les tables (23 tables présentes) | ✅ |
+| Vérifier les 23 tables présentes | ✅ |
 | Vérifier les données (200 acteurs) | ✅ |
 
 ---
