@@ -1,0 +1,2 @@
+=== Début du chargement ===
+ERREUR : fichier manquant : DDL.sql

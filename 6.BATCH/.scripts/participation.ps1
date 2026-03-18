@@ -3,10 +3,10 @@
 # New function to test DB loading
 function Test-LoadDB($scriptPath) {
     # Start Postgres container silently
-    $existing = docker ps -a --filter "name=postgres-test" --format "{{.Names}}"
-    if ($existing -ne "postgres-test") {
+    $existing = docker ps -a --filter "name=postgres-lab" --format "{{.Names}}"
+    if ($existing -ne "postgres-lab") {
         docker run -d -q `
-            --name postgres-test `
+            --name postgres-lab `
             -e POSTGRES_PASSWORD=postgres `
             -e POSTGRES_DB=ecole `
             -p 5432:5432 `
@@ -16,13 +16,14 @@ function Test-LoadDB($scriptPath) {
 
     try {
         # Run student script silently
-        pwsh $scriptPath *> $null
+        # pwsh $scriptPath *> $null
+        pwsh $scriptPath *> "$StudentID/$StudentID-db.txt"
         return ":heavy_check_mark:"
     } catch {
         return ":x:"
     } finally {
-        docker stop postgres-test | Out-Null
-        docker rm postgres-test | Out-Null
+        docker stop postgres-lab | Out-Null
+        docker rm postgres-lab | Out-Null
     }
 }
 
@@ -34,7 +35,7 @@ function Test-LoadDB($scriptPath) {
 . ../.scripts/students.ps1
 
 # Header
-Write-Output "# Participation au $(Get-Date -Format 'dd-MM-yyyy HH:mm')"
+Write-Output "# Participation"
 Write-Output ""
 
 Write-Output "| Table des matières            | Description                                             |"
@@ -54,8 +55,8 @@ Write-Output ""
 Write-Output "## :a: Présence"
 Write-Output ""
 
-Write-Output "|:hash:| Boréal :id: | README.md | images | DDL.sql | DML.sql | DQL.sql | DCL.sql | :mouse_trap: DB"
-Write-Output "|------|-------------|-----------|--------|---------|---------|---------|---------|----|"
+Write-Output "|:hash:| Boréal :id: | README.md | images | DDL.sql | DML.sql | DQL.sql | DCL.sql | :mouse_trap: DB | :wood: log |"
+Write-Output "|------|-------------|-----------|--------|---------|---------|---------|---------|-----------------|------------|"
 
 # Initialize counters
 $i = 0
@@ -91,12 +92,14 @@ foreach ($entry in $STUDENTS) {
 
     $DBSCRIPT = "$StudentID/load-db.ps1"
     $db = ":x:"  # default fail
+    $log = ":x:"  # default fail
 
     if (Test-Path $DBSCRIPT) {
         $db = Test-LoadDB $DBSCRIPT
+        $log = "[:wood:](../$StudentID/$StudentID-db.txt)"
     }
 
-    Write-Output "| $i | [$StudentID](../$README) :point_right: $URL | $r | $img | $ddl | $dml | $dql | $dcl | $db |"
+    Write-Output "| $i | [$StudentID](../$README) :point_right: $URL | $r | $img | $ddl | $dml | $dql | $dcl | $db | $log |"
 
     # Success if ALL files exist
     if ($r -eq ":heavy_check_mark:" -and

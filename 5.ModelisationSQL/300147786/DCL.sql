@@ -1,8 +1,9 @@
+DROP ROLE IF EXISTS utilisateur_1;
 -- Création d’un utilisateur PostgreSQL
 CREATE USER utilisateur_1 WITH PASSWORD 'password123';
 
 -- Donner les droits
-GRANT CONNECT ON DATABASE Colocation TO utilisateur_1;
+GRANT CONNECT ON DATABASE ecole TO utilisateur_1;
 GRANT USAGE ON SCHEMA public TO utilisateur_1;
 
 GRANT SELECT, INSERT, UPDATE, DELETE
