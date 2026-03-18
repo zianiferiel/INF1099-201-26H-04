@@ -14,3 +14,10 @@ Base de données pour gérer une boutique de maillots :
 💳 Paiements
 
 🚚 Livraisons & Livreurs
+
+# 1. Créer la base
+createdb boutique_maillots
+
+# 2. Exécuter les scripts
+psql -d boutique_maillots -f ddl.sql
+psql -d boutique_maillots -f dml.sql
