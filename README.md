@@ -23,6 +23,7 @@ INF1099 (201) - Administration de base de données
 | :four:  |        | [3.Postgres](3.Postgres)               | [🎉](3.Postgres/.scripts/Participation.md) 👉  â Noter :x: (Migration et récupération)/(Administration) |
 | :five:  |        | [4.DCL](4.DCL)                         | [🎉](4.DCL/.scripts/Participation.md) 👉  â Noter :x:|
 | :six:   |        | [5.ModelisationSQL](5.ModelisationSQL) | [🎉](5.ModelisationSQL/.scripts/Participation.md) 👉  â Noter :x:|
+| :seven: |        | [6.BATCH](6.BATCH)                     | [🎉](6.BATCH/.scripts/Participation.md) 👉  â Noter :x:|
 
 ### :abacus: Évaluation
 
