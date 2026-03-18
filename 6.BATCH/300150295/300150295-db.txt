@@ -1,68 +1,22 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-[2026-03-18 14:28:25] [INFO] Conteneur: postgres-lab | Base: ecole | Utilisateur: postgres
-[2026-03-18 14:28:25] [INFO] V�rification du conteneur postgres-lab...
-[2026-03-18 14:28:25] [INFO] Conteneur actif detecte
-[2026-03-18 14:28:25] [INFO] Debut du chargement des scripts...
-[2026-03-18 14:28:25] [INFO] Traitement de DDL.sql...
-[2026-03-18 14:28:25] [ERROR] ERREUR: Fichier manquant - DDL.sql
-[2026-03-18 14:28:25] [INFO] Traitement de DML.sql...
-[2026-03-18 14:28:25] [ERROR] ERREUR: Fichier manquant - DML.sql
-[2026-03-18 14:28:25] [INFO] Traitement de DCL.sql...
-[2026-03-18 14:28:25] [ERROR] ERREUR: Fichier manquant - DCL.sql
-[2026-03-18 14:28:25] [INFO] Traitement de DQL.sql...
-[2026-03-18 14:28:25] [ERROR] ERREUR: Fichier manquant - DQL.sql
-[2026-03-18 14:28:25] [INFO] === RAPPORT FINAL ===
-[2026-03-18 14:28:25] [INFO] Scripts reussis: 0
-[2026-03-18 14:28:25] [INFO] Scripts en erreur: 4
-[2026-03-18 14:28:25] [INFO] Temps d'execution: 0.149838 secondes
-=======
-[2026-03-18 18:26:29] [INFO] Conteneur: postgres-lab | Base: ecole | Utilisateur: postgres
-[2026-03-18 18:26:29] [INFO] V�rification du conteneur postgres-lab...
-[2026-03-18 18:26:29] [INFO] Conteneur actif detecte
-[2026-03-18 18:26:29] [INFO] Debut du chargement des scripts...
-[2026-03-18 18:26:29] [INFO] Traitement de DDL.sql...
-[2026-03-18 18:26:29] [ERROR] ERREUR: Fichier manquant - DDL.sql
-[2026-03-18 18:26:29] [INFO] Traitement de DML.sql...
-[2026-03-18 18:26:29] [ERROR] ERREUR: Fichier manquant - DML.sql
-[2026-03-18 18:26:29] [INFO] Traitement de DCL.sql...
-[2026-03-18 18:26:29] [ERROR] ERREUR: Fichier manquant - DCL.sql
-[2026-03-18 18:26:29] [INFO] Traitement de DQL.sql...
-[2026-03-18 18:26:29] [ERROR] ERREUR: Fichier manquant - DQL.sql
-[2026-03-18 18:26:29] [INFO] === RAPPORT FINAL ===
-[2026-03-18 18:26:29] [INFO] Scripts reussis: 0
-[2026-03-18 18:26:29] [INFO] Scripts en erreur: 4
-[2026-03-18 18:26:29] [INFO] Temps d'execution: 0.1476201 secondes
->>>>>>> 63bcd8dbb1b232ec8c457bffed9a646cfa8a3a3c
-=======
-[2026-03-18 18:29:00] [INFO] Conteneur: postgres-lab | Base: ecole | Utilisateur: postgres
-[2026-03-18 18:29:00] [INFO] V�rification du conteneur postgres-lab...
-[2026-03-18 18:29:00] [INFO] Conteneur actif detecte
-[2026-03-18 18:29:00] [INFO] Debut du chargement des scripts...
-[2026-03-18 18:29:00] [INFO] Traitement de DDL.sql...
-[2026-03-18 18:29:00] [ERROR] ERREUR: Fichier manquant - DDL.sql
-[2026-03-18 18:29:00] [INFO] Traitement de DML.sql...
-[2026-03-18 18:29:00] [ERROR] ERREUR: Fichier manquant - DML.sql
-[2026-03-18 18:29:00] [INFO] Traitement de DCL.sql...
-[2026-03-18 18:29:00] [ERROR] ERREUR: Fichier manquant - DCL.sql
-[2026-03-18 18:29:00] [INFO] Traitement de DQL.sql...
-[2026-03-18 18:29:00] [ERROR] ERREUR: Fichier manquant - DQL.sql
-[2026-03-18 18:29:00] [INFO] === RAPPORT FINAL ===
-[2026-03-18 18:29:00] [INFO] Scripts reussis: 0
-[2026-03-18 18:29:00] [INFO] Scripts en erreur: 4
-[2026-03-18 18:29:00] [INFO] Temps d'execution: 0.1965404 secondes
->>>>>>> 25edbbd9e4ae8d8756059ca5f9119217e80bd741
+[2026-03-18 14:31:27] [INFO] Conteneur: postgres-lab | Base: ecole | Utilisateur: postgres
+[2026-03-18 14:31:27] [INFO] V�rification du conteneur postgres-lab...
+[2026-03-18 14:31:27] [INFO] Conteneur actif detecte
+[2026-03-18 14:31:27] [INFO] Debut du chargement des scripts...
+[2026-03-18 14:31:27] [INFO] Traitement de DDL.sql...
+[2026-03-18 14:31:27] [ERROR] ERREUR: Fichier manquant - DDL.sql
+[2026-03-18 14:31:27] [INFO] Traitement de DML.sql...
+[2026-03-18 14:31:27] [ERROR] ERREUR: Fichier manquant - DML.sql
+[2026-03-18 14:31:27] [INFO] Traitement de DCL.sql...
+[2026-03-18 14:31:27] [ERROR] ERREUR: Fichier manquant - DCL.sql
+[2026-03-18 14:31:27] [INFO] Traitement de DQL.sql...
+[2026-03-18 14:31:27] [ERROR] ERREUR: Fichier manquant - DQL.sql
+[2026-03-18 14:31:27] [INFO] === RAPPORT FINAL ===
+[2026-03-18 14:31:27] [INFO] Scripts reussis: 0
+[2026-03-18 14:31:27] [INFO] Scripts en erreur: 4
+[2026-03-18 14:31:27] [INFO] Temps d'execution: 0.155042 secondes
 
 Resume:
 - Succes: 0
 - Erreurs: 4
-<<<<<<< HEAD
-<<<<<<< HEAD
-- Duree: 0.149838s
-=======
-- Duree: 0.1476201s
->>>>>>> 63bcd8dbb1b232ec8c457bffed9a646cfa8a3a3c
-=======
-- Duree: 0.1965404s
->>>>>>> 25edbbd9e4ae8d8756059ca5f9119217e80bd741
+- Duree: 0.155042s
 - Log: execution.log
