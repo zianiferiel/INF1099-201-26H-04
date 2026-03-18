@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Execution de DDL.sql
 [31;1mpsql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory[0m
 [31;1m	Is the server running locally and accepting connections on that socket?[0m
@@ -35,3 +36,12 @@ ot exist[0m
 [31;1m             ^[0m
 Base chargée avec succès
 Temps d'execution : 00:00:00.7974750
+=======
+
+    Directory: /home/runner/work/INF1099-201-26H-04/INF1099-201-26H-04/6.BATCH
+
+[32;1mUnixMode  [0m[32;1m       User[0m[32;1m Group     [0m[32;1m    LastWriteTime[0m[32;1m         Size[0m[32;1m Name[0m
+[32;1m--------  [0m [32;1m      ----[0m [32;1m-----     [0m [32;1m   -------------[0m [32;1m        ----[0m [32;1m----[0m
+drwxr-xr-x     runner runner     03/18/2026 22:11         4096 [44;1mlog[0m
+ERREUR : fichier manquant DDL.sql
+>>>>>>> 2d534e42a66eb132375267c7d6e7c0be83c2215e
