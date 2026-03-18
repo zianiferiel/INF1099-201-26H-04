@@ -26,3 +26,15 @@ Nous avons créé deux rôles distincts pour simuler une gestion scolaire réell
 ```sql
 CREATE USER prof_test WITH PASSWORD 'prof123';
 CREATE USER etudiant_test WITH PASSWORD 'etudiant123';
+```
+## 📊 Preuves de Fonctionnement
+
+### ✅ Test 1 : Succès du Professeur
+Le professeur est autorisé à insérer des données dans la table des notes.
+![Capture Succès Prof](./images/prof_success.png)
+*Légende : Insertion d'une note de 95 réussie par prof_test*
+
+### ❌ Test 2 : Blocage de l'Étudiant (Sécurité)
+L'étudiant tente de modifier une note, mais PostgreSQL bloque l'action grâce au DCL.
+![Capture Erreur Étudiant](./images/etudiant_error.png)
+*Légende : Message d'erreur "Permission denied for table note"*
