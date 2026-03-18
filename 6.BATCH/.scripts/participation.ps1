@@ -55,8 +55,8 @@ Write-Output ""
 Write-Output "## :a: Présence"
 Write-Output ""
 
-Write-Output "|:hash:| Boréal :id: | README.md | images | DDL.sql | DML.sql | DQL.sql | DCL.sql | :mouse_trap: DB"
-Write-Output "|------|-------------|-----------|--------|---------|---------|---------|---------|----|"
+Write-Output "|:hash:| Boréal :id: | README.md | images | DDL.sql | DML.sql | DQL.sql | DCL.sql | :mouse_trap: DB | :wood: log |"
+Write-Output "|------|-------------|-----------|--------|---------|---------|---------|---------|-----------------|------------|"
 
 # Initialize counters
 $i = 0
@@ -97,7 +97,7 @@ foreach ($entry in $STUDENTS) {
         $db = Test-LoadDB $DBSCRIPT
     }
 
-    Write-Output "| $i | [$StudentID](../$README) :point_right: $URL | $r | $img | $ddl | $dml | $dql | $dcl | $db |"
+    Write-Output "| $i | [$StudentID](../$README) :point_right: $URL | $r | $img | $ddl | $dml | $dql | $dcl | $db | [$StudentID](../$StudentID-db.txt) |"
 
     # Success if ALL files exist
     if ($r -eq ":heavy_check_mark:" -and
