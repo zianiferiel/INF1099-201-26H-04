@@ -1,92 +1,13 @@
 Chargement de la base de données...
 Execution de DDL.sql
-psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "ecole" does not exist
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
 Execution de DML.sql
 psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
 	Is the server running locally and accepting connections on that socket?
 Execution de DCL.sql
-CREATE ROLE
-CREATE ROLE
-CREATE ROLE
-ERROR:  relation "client" does not exist
-ERROR:  relation "adresse" does not exist
-ERROR:  relation "marque" does not exist
-ERROR:  relation "categorie" does not exist
-ERROR:  relation "crampon" does not exist
-ERROR:  relation "stock" does not exist
-ERROR:  relation "commande" does not exist
-ERROR:  relation "lignecommande" does not exist
-ERROR:  relation "paiement" does not exist
-ERROR:  relation "livraison" does not exist
-ERROR:  relation "avis" does not exist
-ERROR:  relation "client" does not exist
-ERROR:  relation "adresse" does not exist
-ERROR:  relation "marque" does not exist
-ERROR:  relation "categorie" does not exist
-ERROR:  relation "crampon" does not exist
-ERROR:  relation "stock" does not exist
-GRANT
-ERROR:  relation "commande" does not exist
-ERROR:  relation "lignecommande" does not exist
-ERROR:  relation "paiement" does not exist
-ERROR:  relation "livraison" does not exist
-ERROR:  relation "avis" does not exist
-ERROR:  relation "commande_id_commande_seq" does not exist
-ERROR:  relation "lignecommande_id_ligne_seq" does not exist
-ERROR:  relation "paiement_id_paiement_seq" does not exist
-ERROR:  relation "livraison_id_livraison_seq" does not exist
-ERROR:  relation "client" does not exist
-ERROR:  relation "adresse" does not exist
-ERROR:  relation "marque" does not exist
-ERROR:  relation "categorie" does not exist
-ERROR:  relation "crampon" does not exist
-ERROR:  relation "stock" does not exist
-ERROR:  relation "commande" does not exist
-ERROR:  relation "lignecommande" does not exist
-ERROR:  relation "paiement" does not exist
-ERROR:  relation "livraison" does not exist
-ERROR:  relation "avis" does not exist
-CREATE ROLE
-GRANT ROLE
-CREATE ROLE
-GRANT ROLE
-CREATE ROLE
-GRANT ROLE
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
 Execution de DQL.sql
-ERROR:  relation "client" does not exist
-LINE 8: FROM Client
-             ^
-ERROR:  relation "crampon" does not exist
-LINE 14: FROM Crampon c
-              ^
-ERROR:  relation "commande" does not exist
-LINE 9: FROM Commande co
-             ^
-ERROR:  relation "commande" does not exist
-LINE 11: FROM Commande co
-              ^
-ERROR:  relation "commande" does not exist
-LINE 8: FROM Commande co
-             ^
-ERROR:  relation "commande" does not exist
-LINE 11: FROM Commande co
-              ^
-ERROR:  relation "crampon" does not exist
-LINE 7: FROM Crampon c
-             ^
-ERROR:  relation "client" does not exist
-LINE 6: FROM Client cl
-             ^
-ERROR:  relation "crampon" does not exist
-LINE 6: FROM Crampon c
-             ^
-ERROR:  relation "marque" does not exist
-LINE 6: FROM Marque m
-             ^
-ERROR:  relation "commande" does not exist
-LINE 6: FROM Commande co
-             ^
-ERROR:  relation "crampon" does not exist
-LINE 6: FROM Crampon c
-             ^
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "ecole" does not exist
 Chargement terminé.

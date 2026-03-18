@@ -1,45 +1,14 @@
 Chargement de la base de données...
 Execution de DDL.sql
-psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "ecole" does not exist
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
 Execution de DML.sql
-ERROR:  relation "utilisateur" does not exist
-LINE 1: INSERT INTO utilisateur (nom, prenom, email, mot_de_passe, t...
-                    ^
-ERROR:  relation "profil" does not exist
-LINE 1: INSERT INTO profil (description, age, genre, ville, budget_m...
-                    ^
-ERROR:  relation "annonce" does not exist
-LINE 1: INSERT INTO annonce (type_annonce, ville, loyer, date_dispon...
-                    ^
-ERROR:  relation "preference" does not exist
-LINE 1: INSERT INTO preference (budget_min, budget_max, ville_souhai...
-                    ^
-ERROR:  relation "match" does not exist
-LINE 1: INSERT INTO match (statut, id_utilisateur_1, id_utilisateur_...
-                    ^
-ERROR:  relation "message" does not exist
-LINE 1: INSERT INTO message (contenu, id_match, id_expediteur)
-                    ^
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
 Execution de DCL.sql
-CREATE ROLE
-GRANT
-GRANT
-GRANT
-ALTER DEFAULT PRIVILEGES
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
 Execution de DQL.sql
-ERROR:  relation "utilisateur" does not exist
-LINE 1: SELECT * FROM utilisateur;
-                      ^
-ERROR:  relation "annonce" does not exist
-LINE 2: FROM annonce
-             ^
-ERROR:  relation "utilisateur" does not exist
-LINE 2: FROM utilisateur u
-             ^
-ERROR:  relation "message" does not exist
-LINE 2: FROM message m
-             ^
-ERROR:  relation "match" does not exist
-LINE 2: FROM match
-             ^
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
 Chargement terminé.
