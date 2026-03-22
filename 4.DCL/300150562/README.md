@@ -108,6 +108,8 @@ JOIN MAILLOT m ON m.ID_Maillot = lc.ID_Maillot;
 CREATE USER app_user WITH PASSWORD '1234';
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO app_user;
 </code></pre>
+<img width="975" height="893" alt="image" src="https://github.com/user-attachments/assets/2718b5b9-e156-4e3c-94b7-1605e030d88e" />
+
 
 <h2>👨‍💻 Auteur</h2>
 <p><strong>Corneil Ekofo Wema</strong><br>
