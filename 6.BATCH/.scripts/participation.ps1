@@ -1,29 +1,51 @@
 #!/usr/bin/env pwsh
 
 # New function to test DB loading
-function Test-LoadDB($scriptPath) {
-    # Start Postgres container silently
-    $existing = docker ps -a --filter "name=postgres-lab" --format "{{.Names}}"
-    if ($existing -ne "postgres-lab") {
-        docker run -d -q `
-            --name postgres-lab `
-            -e POSTGRES_PASSWORD=postgres `
-            -e POSTGRES_DB=ecole `
-            -p 5432:5432 `
-            postgres | Out-Null
-        Start-Sleep -Seconds 10
+function Test-LoadDB($scriptPath, $StudentID) {
+
+    $ErrorActionPreference = "Stop"
+
+    # 🔥 Reset complet du conteneur
+    docker rm -f postgres-lab 2>$null | Out-Null
+
+    docker run -d -q `
+        --name postgres-lab `
+        -e POSTGRES_PASSWORD=postgres `
+        -e POSTGRES_DB=ecole `
+        postgres | Out-Null
+
+    # 🔥 Attendre readiness
+    $ready = $false
+    for ($i=0; $i -lt 15; $i++) {
+        $status = docker exec postgres-lab pg_isready 2>$null
+        if ($status -match "accepting connections") {
+            $ready = $true
+            break
+        }
+        Start-Sleep -Seconds 1
     }
 
-    try {
-        # Run student script silently
-        # pwsh $scriptPath *> $null
-        pwsh $scriptPath *> "$StudentID/$StudentID-db.txt"
-        return ":heavy_check_mark:"
-    } catch {
+    if (-not $ready) {
         return ":x:"
-    } finally {
-        docker stop postgres-lab | Out-Null
-        docker rm postgres-lab | Out-Null
+    }
+
+    # 🔥 Sécurité : créer DB si nécessaire
+    docker exec postgres-lab psql -U postgres -c "CREATE DATABASE ecole;" 2>$null
+
+    try {
+        Push-Location $StudentID
+
+        pwsh ./load-db.ps1 *> "$StudentID-db.txt"
+
+        Pop-Location
+        return ":heavy_check_mark:"
+    }
+    catch {
+        Pop-Location
+        return ":x:"
+    }
+    finally {
+        docker rm -f postgres-lab 2>$null | Out-Null
     }
 }
 
@@ -95,7 +117,7 @@ foreach ($entry in $STUDENTS) {
     $log = ":x:"  # default fail
 
     if (Test-Path $DBSCRIPT) {
-        $db = Test-LoadDB $DBSCRIPT
+        $db = Test-LoadDB $DBSCRIPT $StudentID
         $log = "[:wood:](../$StudentID/$StudentID-db.txt)"
     }
 
