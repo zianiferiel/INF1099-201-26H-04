@@ -42,6 +42,8 @@ Le projet est structuré en plusieurs scripts SQL :
 
 \## 🐳 Conteneur Docker
 
+<img width="941" height="157" alt="image" src="https://github.com/user-attachments/assets/89b4b1bc-fe82-4e38-9986-c319a0b383b7" />
+
 
 
 Un conteneur PostgreSQL est utilisé :
@@ -189,7 +191,6 @@ Afficher les tables :
 
 \\dt
 
-<img width="939" height="684" alt="image" src="https://github.com/user-attachments/assets/0bd30005-a84a-4f52-ad2f-599f8b581e2b" />
 
 
 
