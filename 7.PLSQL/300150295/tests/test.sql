@@ -2,7 +2,7 @@
 CALL ajouter_etudiant('Ali', 22, 'ali@email.com');
 
 -- Test insertion invalide (age < 18)
-DO \$\$
+DO $$
 BEGIN
     BEGIN
         CALL ajouter_etudiant('Bob', 15, 'bob@email.com');
@@ -11,10 +11,10 @@ BEGIN
             RAISE NOTICE 'Erreur attendue OK : %', SQLERRM;
     END;
 END;
-\$\$;
+$$;
 
 -- Test fonction
 SELECT nombre_etudiants();
 
--- Vérifier les logs
+-- Verifier les logs
 SELECT * FROM logs;
