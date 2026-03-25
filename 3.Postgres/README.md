@@ -1,5 +1,7 @@
 # PostgreSQL DB 🧻 
 
+[:tada: Participation](.scripts/Participation.md)
+
 ## Objectifs
 
 À la fin de cette leçon, l’étudiant sera capable de :
@@ -275,6 +277,29 @@ SELECT * FROM film WHERE title ILIKE '%star%';
 
 ---
 
+**Commandes `psql` essentielles pour l’administration PostgreSQL**, 
+
+| Commande                                  | Type    | Effet / Explication courte                                                                      |
+| ----------------------------------------- | ------- | ----------------------------------------------------------------------------------------------- |
+| `psql -U user -d db`                      | SA      | Se connecter à la base `db` avec l’utilisateur `user`.                                          |
+| `psql -h host -U user -d db`              | SA      | Connexion distante à la base sur `host`.                                                        |
+| `\q`                                      | TF / SA | Quitte le client `psql`.                                                                        |
+| `\l` ou `\list`                           | SA      | Affiche toutes les bases de données disponibles.                                                |
+| `\du`                                     | SA      | Affiche tous les rôles et utilisateurs avec leurs privilèges.                                   |
+| `\dt`                                     | SA      | Liste toutes les tables de la base courante.                                                    |
+| `\d table`                                | SA      | Affiche la structure (schéma) de la table spécifiée.                                            |
+| `\password [user]`                        | SA      | Change le mot de passe du rôle indiqué ; si aucun rôle, change le mot de passe du rôle courant. |
+| `SET ROLE role_name;`                     | SA      | Change le rôle actif dans la session psql, pour exécuter des commandes avec ses privilèges.     |
+| `\copy table TO 'file.csv' CSV HEADER;`   | SA      | Exporte les données d’une table vers un fichier CSV.                                            |
+| `\copy table FROM 'file.csv' CSV HEADER;` | SA      | Importe les données depuis un fichier CSV vers la table.                                        |
+| `psql -f fichier.sql`                     | SA      | Exécute un script SQL depuis un fichier dans la base courante.                                  |
+| `\x`                                      | TF / SA | Active/désactive le formatage étendu pour les résultats (plus lisible pour les tables larges).  |
+| `\watch n`                                | SA      | Réexécute la dernière commande toutes les `n` secondes (utile pour le monitoring).              |
+| `\conninfo`                               | SA      | Affiche les informations sur la connexion actuelle (base, utilisateur, host, port).             |
+
+---
+
+
 # :books: References
 
 Pour supprimer le conteneur :
@@ -314,3 +339,7 @@ docker volume ls
 ```
 
 ---
+
+
+
+# 📝 PostgreSQL / [psql Cheat Sheet](.psql)

@@ -1,10 +1,12 @@
-# INF1099 – TP : Manipulation de données avec MySQL et Podman sur Windows
+# Manipulation de données avec MySQL et administration
+
+[:tada: Participation](.scripts/Participation.md)
 
 ## 🎯 Objectifs
 
 À la fin de ce TP, l’étudiant sera capable de :
 
-1. Installer et configurer [**Podman**](1.Podman) avec alias **Docker** sur Windows
+1. Installer et configurer [**Podman**](.podman) avec alias **Docker** sur Windows
 2. Créer et démarrer la machine Podman (VM Linux)
 3. Lancer un conteneur **MySQL**
 4. Créer une base de données et un utilisateur
@@ -56,7 +58,7 @@ Set-Alias docker podman
 # Pour rendre l'alias permanent
 notepad $PROFILE
 # Ajouter la ligne suivante dans le fichier :
-# Set-Alias docker podman
+Set-Alias docker podman
 ```
 
 ---

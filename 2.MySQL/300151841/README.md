@@ -1,269 +1,235 @@
-&nbsp;# 📄 README.md — TP INF1099
+# 🐬 TP INF1099 — MySQL avec Podman
 
-\## Manipulation de données avec MySQL et Podman sur Windows
-
-
+> **INF1099 — Bases de données** · Massinissa Mameri · Hiver 2026
 
 ---
 
+## 📋 Table des matières
 
-
-\## 👤 Étudiant
-
-\- \*\*Nom :\*\* Massinissa mameri
-
-\- \*\*Cours :\*\* INF1099  
-
-\- \*\*Environnement :\*\* Windows 10/11 – PowerShell – Podman – MySQL 8.0  
-
-
-
----
-
-
-
-\## 🎯 Objectif du TP
-
-L’objectif de ce TP est de :
-
-\- Installer et configurer Podman avec WSL2 sur Windows
-
-\- Lancer un conteneur MySQL
-
-\- Créer une base de données Sakila
-
-\- Créer un utilisateur MySQL
-
-\- Importer les données Sakila
-
-\- Vérifier la manipulation des tables SQL
-
-
+- [Objectif](#-objectif)
+- [Environnement utilisé](#️-environnement-utilisé)
+- [Étapes réalisées](#-étapes-réalisées)
+  - [Étape 1 — Installation et configuration de Podman](#1️⃣-étape-1--installation-et-configuration-de-podman)
+  - [Étape 2 — Création du dossier de travail](#2️⃣-étape-2--création-du-dossier-de-travail)
+  - [Étape 3 — Préparation de la base Sakila](#3️⃣-étape-3--préparation-de-la-base-sakila)
+  - [Étape 4 — Alias Docker vers Podman](#4️⃣-étape-4--alias-docker-vers-podman)
+  - [Étape 5 — Lancement du conteneur MySQL](#5️⃣-étape-5--lancement-du-conteneur-mysql)
+  - [Étape 6 — Création de la base Sakila](#6️⃣-étape-6--création-de-la-base-sakila)
+  - [Étape 7 — Création de l'utilisateur](#7️⃣-étape-7--création-de-lutilisateur)
+  - [Étape 8 — Importation de Sakila](#8️⃣-étape-8--importation-de-sakila)
+  - [Étape 9 — Vérification finale](#9️⃣-étape-9--vérification-finale)
+- [Conclusion](#-conclusion)
+- [Captures d'écran](#-captures-décran)
 
 ---
 
+## 🎯 Objectif
 
+Ce TP consiste à mettre en place un environnement MySQL complet sous Windows via Podman :
 
-\## 🛠️ Environnement utilisé
-
-\- Windows 10/11 (64 bits)
-
-\- PowerShell (Administrateur)
-
-\- Podman 5.7.1
-
-\- WSL2
-
-\- MySQL 8.0 (conteneur Docker/Podman)
-
-\- Base de données Sakila (officielle MySQL)
-
-
+| # | Objectif |
+|---|----------|
+| ✅ | Installer et configurer Podman avec WSL2 |
+| ✅ | Lancer un conteneur MySQL |
+| ✅ | Créer la base de données Sakila |
+| ✅ | Créer un utilisateur MySQL |
+| ✅ | Importer les données Sakila |
+| ✅ | Vérifier la présence des tables |
 
 ---
 
+## 🛠️ Environnement utilisé
 
+| Composant | Version / Détail |
+|-----------|-----------------|
+| 💻 OS | Windows 10/11 (64 bits) |
+| ⚙️ Shell | PowerShell (Administrateur) |
+| 🐳 Podman | 5.7.1 |
+| 🐧 WSL2 | Activé |
+| 🐬 MySQL | 8.0 (conteneur) |
+| 🗄️ Base de données | Sakila (officielle MySQL) |
 
-\## 📦 Étapes réalisées
+---
 
+## 📦 Étapes réalisées
 
+---
 
-\### 1️⃣ Installation et configuration de Podman
+### 1️⃣ Étape 1 — Installation et configuration de Podman
 
-\- Installation de Podman pour Windows
-
-\- Choix du backend WSL2
-
-\- Activation de WSL
-
-\- Initialisation et démarrage de la machine Podman  
-
-
-
-\*\*Commandes utilisées :\*\*
+Vérification de la version et initialisation de la machine Podman :
 
 ```powershell
-
 podman --version
-
 podman machine init
-
 podman machine start
-
 podman machine list
+```
 
-2️⃣ Création du dossier de travail
+---
 
-Création du dossier INF1099 dans Downloads :
+### 2️⃣ Étape 2 — Création du dossier de travail
 
-
-
-$projectDir = "$env:USERPROFILE\\Downloads\\INF1099"
-
+```powershell
+$projectDir = "$env:USERPROFILE\Downloads\INF1099"
 New-Item -ItemType Directory -Path $projectDir -Force
+```
 
-3️⃣ Téléchargement et préparation de Sakila
+---
 
-Téléchargement de la base Sakila officielle (format SQL), puis décompression :
+### 3️⃣ Étape 3 — Préparation de la base Sakila
 
+Extraction de l'archive téléchargée :
 
+```powershell
+Expand-Archive -Path "$projectDir\sakila-db.zip" -DestinationPath $projectDir -Force
+```
 
-Expand-Archive -Path "$projectDir\\sakila-db.zip" -DestinationPath $projectDir -Force
+Fichiers obtenus après extraction :
 
-Fichiers obtenus :
+```
+sakila-db/
+├── sakila-schema.sql   # Structure des tables
+└── sakila-data.sql     # Données à importer
+```
 
+---
 
+### 4️⃣ Étape 4 — Alias Docker vers Podman
 
-sakila-schema.sql
-
-
-
-sakila-data.sql
-
-
-
-4️⃣ Alias Docker vers Podman
-
-Afin d’utiliser les commandes Docker avec Podman :
-
-
-
+```powershell
 Set-Alias docker podman
+```
 
-5️⃣ Lancement du conteneur MySQL
+> Cet alias permet d'utiliser la commande `docker` comme raccourci vers `podman`.
 
-Création et démarrage du conteneur MySQL :
+---
 
+### 5️⃣ Étape 5 — Lancement du conteneur MySQL
 
-
+```powershell
 docker run -d --name INF1099-mysql `
+  -e MYSQL_ROOT_PASSWORD=rootpass `
+  -p 3306:3306 `
+  mysql:8.0
+```
 
-&nbsp; -e MYSQL\_ROOT\_PASSWORD=rootpass `
+Vérification que le conteneur est actif :
 
-&nbsp; -p 3306:3306 `
-
-&nbsp; mysql:8.0
-
-Vérification :
-
-
-
+```powershell
 docker ps
+```
 
-6️⃣ Création de la base de données Sakila
+---
 
-docker exec -it INF1099-mysql mysql -h 127.0.0.1 -u root -prootpass -e "CREATE DATABASE sakila;"
+### 6️⃣ Étape 6 — Création de la base Sakila
+
+```powershell
+docker exec -it INF1099-mysql mysql -u root -prootpass -e "CREATE DATABASE sakila;"
+```
 
 Vérification :
 
+```powershell
+docker exec -it INF1099-mysql mysql -u root -prootpass -e "SHOW DATABASES;"
+```
 
+---
 
-docker exec -it INF1099-mysql mysql -h 127.0.0.1 -u root -prootpass -e "SHOW DATABASES;"
+### 7️⃣ Étape 7 — Création de l'utilisateur
 
-7️⃣ Création de l’utilisateur MySQL
+Création de l'utilisateur `etudiants` :
 
-Création de l’utilisateur etudiants :
+```powershell
+docker exec -it INF1099-mysql mysql -u root -prootpass -e \
+  "CREATE USER 'etudiants'@'%' IDENTIFIED BY 'etudiants_1';"
+```
 
+Attribution des permissions sur la base Sakila :
 
+```powershell
+docker exec -it INF1099-mysql mysql -u root -prootpass -e \
+  "GRANT ALL PRIVILEGES ON sakila.* TO 'etudiants'@'%'; FLUSH PRIVILEGES;"
+```
 
-docker exec -it INF1099-mysql mysql -h 127.0.0.1 -u root -prootpass -e `
+---
 
-"CREATE USER 'etudiants'@'%' IDENTIFIED BY 'etudiants\_1';"
+### 8️⃣ Étape 8 — Importation de Sakila
 
-Attribution des droits :
+**Import du schéma (structure des tables) :**
 
+```powershell
+Get-Content "$projectDir\sakila-db\sakila-schema.sql" |
+  docker exec -i INF1099-mysql mysql -u etudiants -petudiants_1 sakila
+```
 
+**Import des données :**
 
-docker exec -it INF1099-mysql mysql -h 127.0.0.1 -u root -prootpass -e `
+```powershell
+Get-Content "$projectDir\sakila-db\sakila-data.sql" |
+  docker exec -i INF1099-mysql mysql -u etudiants -petudiants_1 sakila
+```
 
-"GRANT ALL PRIVILEGES ON sakila.\* TO 'etudiants'@'%'; FLUSH PRIVILEGES;"
+---
 
-8️⃣ Importation de la base Sakila
+### 9️⃣ Étape 9 — Vérification finale
 
-Import du schéma :
+```powershell
+docker exec -it INF1099-mysql mysql -u etudiants -petudiants_1 -e "USE sakila; SHOW TABLES;"
+```
 
+> ✅ Les tables `actor`, `film`, `customer`, `category`, etc. sont présentes.
 
+---
 
-Get-Content "$projectDir\\sakila-db\\sakila-schema.sql" |
+## ✅ Conclusion
 
-docker exec -i INF1099-mysql mysql -u etudiants -petudiants\_1 sakila
+| Résultat | Statut |
+|----------|--------|
+| Conteneur MySQL fonctionnel avec Podman | ✔️ |
+| Base Sakila importée avec succès | ✔️ |
+| Environnement prêt pour les exercices SQL | ✔️ |
 
-Import des données :
+---
 
+## 📸 Captures d'écran
 
+---
 
-Get-Content "$projectDir\\sakila-db\\sakila-data.sql" |
+**Capture 1 —**
 
-docker exec -i INF1099-mysql mysql -u etudiants -petudiants\_1 sakila
+![Capture 1](https://github.com/user-attachments/assets/fc263246-769a-4789-9b6c-d008eea9fac5)
 
-9️⃣ Vérification finale
+---
 
-Connexion à MySQL et affichage des tables :
+**Capture 2 — Machine Podman active**
 
+<img width="938" height="178" alt="Machine Podman en cours d'exécution" src="https://github.com/user-attachments/assets/8c71d200-5d06-45ef-a583-27013c5e6c2d" />
 
+---
 
-docker exec -it INF1099-mysql mysql -u etudiants -petudiants\_1 -e "USE sakila; SHOW TABLES;"
+**Capture 3 — Conteneur MySQL actif**
 
-Résultat :
+<img width="941" height="171" alt="Conteneur MySQL actif" src="https://github.com/user-attachments/assets/c3cedcf5-6ca1-4d6f-b1d0-ba17cd4cd873" />
 
+---
 
+**Capture 4 — Bases de données MySQL**
 
-Les tables actor, film, customer, category, etc. sont présentes.
+<img width="940" height="663" alt="Bases de données MySQL" src="https://github.com/user-attachments/assets/bbba65d9-8128-414e-8220-9c0524821760" />
 
+---
 
+**Capture 5 — Tables Sakila**
 
-✅ Conclusion
+<img width="929" height="456" alt="Tables Sakila (preuve finale)" src="https://github.com/user-attachments/assets/63dc9525-a725-419b-81a3-7ae91b27ab8c" />
 
-Le conteneur MySQL fonctionne correctement avec Podman.
+---
 
-La base de données Sakila a été importée avec succès et est prête pour les exercices SQL du cours INF1099.
+**Capture 6 — Connexion Workbench**
 
+<img width="1207" height="1020" alt="connexion sur workbench" src="https://github.com/user-attachments/assets/e21cce2a-4482-454c-ab6f-79d995f8f911" />
 
+---
 
-📸 CAPTURES D’ÉCRAN À METTRE DANS LE README
-
-👉 Très important pour la note
-
-
-
-Capture 1 — Podman fonctionnel
-<img width="955" height="173" alt="Podman fonctionnel" src="https://github.com/user-attachments/assets/7a9b3294-deab-4b84-a50c-146e45d81d10" />
-
-
-
-
-
-Capture 2 — Machine Podman en cours d’exécution
- ![wait](https://github.com/user-attachments/assets/338dbde6-ef8b-4ef8-b85f-eaf1a4916d7d" />)
-
-
-
-
-
-
-Capture 3 — Conteneur MySQL actif
- ![wait](https://github.com/user-attachments/assets/522a6d10-6f2d-4a7f-b656-60d239674d90)
-
-
-
-
-Capture 4 — Bases de données MySQL
-
-
-![wait](https://github.com/user-attachments/assets/d85461f4-0ace-49df-bac0-23d80507fe30)
-
-
-
-
-Capture 5 — Tables Sakila (preuve finale)
-
- ![wait](https://github.com/user-attachments/assets/759b2fbc-9b49-4454-99f2-8e9417d7d92b)
-
-
-
-
-Capture 6 — connexion sur workbench
-![wait](https://github.com/user-attachments/assets/143e3d18-b17e-4bff-bbd7-2e9b7b50dea9)
-
-
-
+*Cours INF1099 — Bases de données · Massinissa Mameri · Hiver 2026*
