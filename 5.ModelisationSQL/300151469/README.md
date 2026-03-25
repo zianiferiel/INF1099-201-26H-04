@@ -43,6 +43,7 @@ La conception de cette base de données a suivi un processus structuré :
 ---
 
 ## 4. Diagramme ER
+## 4. Diagramme ER
 
 ```mermaid
 erDiagram
@@ -84,9 +85,11 @@ erDiagram
         int ID_Paiement PK
         decimal Montant
         string Mode_Paiement
+```markdown
         date Date_Paiement
         int ID_RendezVous FK
     }
+
 5. Justification des choix
 Diagramme ER
 
