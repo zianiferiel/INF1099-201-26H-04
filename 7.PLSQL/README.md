@@ -252,7 +252,7 @@ END;
 ## 1️⃣ Structure du projet
 
 ```
-tp-postgresql-simple/
+🆔/
 │
 ├── init/
 │   ├── 01-ddl.sql
