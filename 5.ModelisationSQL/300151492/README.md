@@ -1,4 +1,4 @@
-# 🎟️ TP Modélisation SQL — Gestion des Participations à des Événements
+#  TP Modélisation SQL — Gestion des Participations à des Événements
 
 > Base de données relationnelle pour gérer les inscriptions de personnes à des événements, suivre leur présence et analyser les résultats.
 
@@ -9,20 +9,20 @@
 ---
 
 
-## 🎯 Aperçu du projet
+##  Aperçu du projet
 
 Ce projet modélise la gestion complète d'événements : qui s'inscrit, qui vient, quelle note ils donnent.
 
 | Catégorie | Détails |
 |-----------|---------|
-| 🗄️ SGBD | PostgreSQL 18 |
-| 🗂️ Tables | 3 tables (`Personne`, `Evenement`, `Participation`) |
-| 👁️ Vues | 1 vue récapitulative |
-| ⚡ Index | 5 index pour optimiser les performances |
+|  SGBD | PostgreSQL 18 |
+|  Tables | 3 tables (`Personne`, `Evenement`, `Participation`) |
+|  Vues | 1 vue récapitulative |
+|  Index | 5 index pour optimiser les performances |
 
 ---
 
-## 📊 Diagramme ER
+##  Diagramme ER
 
 Voici la structure complète de la base de données :
 
