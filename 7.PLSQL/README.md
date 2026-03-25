@@ -25,9 +25,6 @@
 
 ---
 
-Ah, tu touches à un point important. Le **gros problème d’utiliser massivement les langages procéduraux (PL) dans une base de données**, c’est qu’ils peuvent **nuire à la portabilité et à la maintenance**. Voici les détails :
-
----
 
 ## ⚠️ Limites et risques des PL dans une base
 
