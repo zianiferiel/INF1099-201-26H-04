@@ -1,5 +1,36 @@
 #!/usr/bin/env pwsh
 
+function Test-CommonItemExists {
+    param(
+        [string]$Path,
+        [switch]$IsReadme
+    )
+
+    if (-not (Test-Path $Path)) {
+        return ":x:"
+    }
+
+    if ($IsReadme) {
+        $Content = Get-Content $Path -Raw
+        $HasText = ($Content -match '\S')
+        $HasImageInReadme = (
+            ($Content -match '!\[.*\]\(.*\)') -or
+            ($Content -match '<img.*?>') -or
+            ($Content -match '<image.*?>')
+        )
+
+        if ($HasText -and $HasImageInReadme) {
+            return ":1st_place_medal:"
+        }
+        else {
+            return ":2nd_place_medal:"
+        }
+    }
+
+    return ":heavy_check_mark:"
+}
+
+
 function Get-GitHubAvatarLink {
     param(
         [string]$GitHubID,
