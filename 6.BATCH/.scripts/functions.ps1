@@ -1,17 +1,36 @@
 #!/usr/bin/env pwsh
 
+#!/usr/bin/env pwsh
+
 function Test-ItemExists {
     param(
-        [string]$Path
+        [string]$Path,
+        [switch]$IsReadme
     )
 
-    if (Test-Path $Path) {
-        return ":heavy_check_mark:"
+    if (-not (Test-Path $Path)) {
+        return ":x:"
     }
 
-    return ":x:"
-}
+    if ($IsReadme) {
+        $Content = Get-Content $Path -Raw
+        $HasText = ($Content -match '\S')
+        $HasImageInReadme = (
+            ($Content -match '!\[.*\]\(.*\)') -or
+            ($Content -match '<img.*?>') -or
+            ($Content -match '<image.*?>')
+        )
 
+        if ($HasText -and $HasImageInReadme) {
+            return ":1st_place_medal:"
+        }
+        else {
+            return ":2nd_place_medal:"
+        }
+    }
+
+    return ":heavy_check_mark:"
+}
 
 function Get-StudentPaths {
     param(
@@ -35,7 +54,7 @@ function Get-StudentChecks {
     )
 
     return @{
-        README = Test-ItemExists -Path $Paths.README
+        README = Test-ItemExists -Path $Paths.README -IsReadme
         Images = Test-ItemExists -Path $Paths.Images
         DDL    = Test-ItemExists -Path $Paths.DDL
         DML    = Test-ItemExists -Path $Paths.DML
