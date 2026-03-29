@@ -4,11 +4,14 @@ $ErrorActionPreference = "Stop"
 
 # Importer les fonctions
 . .scripts/functions.ps1
+. .scripts/DBfunctions.ps1
 
 # Importer la liste des étudiants
 . ../.scripts/students.ps1
+. ../.scripts/commons.ps1
 
 Write-ParticipationHeader
+Write-PresenceHeader
 
 $i = 0
 $s = 0
