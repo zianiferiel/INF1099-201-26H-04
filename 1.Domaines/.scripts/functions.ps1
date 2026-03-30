@@ -17,7 +17,7 @@ function Test-ItemExists {
     $content = Get-Content $Path -Raw
 
     # Check for mermaid block
-    $hasMermaid = $content -match '```mermaid[\s\S]*?```'
+    $hasMermaid = $content -match '```mermaid'
 
     # Check for Markdown image: ![alt](url)
     $hasMdImage = $content -match '!\[.*?\]\(.*?\)'
