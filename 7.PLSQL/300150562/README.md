@@ -9,6 +9,8 @@ L’objectif est de manipuler la logique métier directement dans la base de don
 ---
 
 ## 🧱 Structure
+
+```
 300150562/
 ├── init/
 │ ├── 01-ddl.sql
@@ -17,7 +19,7 @@ L’objectif est de manipuler la logique métier directement dans la base de don
 ├── tests/
 │ └── test.sql
 └── README.md
-
+```
 
 ---
 
