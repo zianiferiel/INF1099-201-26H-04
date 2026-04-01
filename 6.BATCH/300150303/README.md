@@ -1,7 +1,7 @@
-# 💇 Hair Salon — PostgreSQL Lab
+# salon de coiffure — PostgreSQL Lab
 
 > Automated database loading with Docker/Podman and PowerShell  
-> Author: Jesmina
+> Author: Jesmina DOS-REIS 300150303
 
 ---
 
