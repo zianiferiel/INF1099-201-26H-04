@@ -271,6 +271,21 @@ END;
 
 ## 2️⃣ Lancer PostgreSQL avec Docker
 
+- [ ] 🪟 PowerShell
+
+```powershell
+docker run -d `
+  --name tp_postgres `
+  -e POSTGRES_USER=etudiant `
+  -e POSTGRES_PASSWORD=etudiant `
+  -e POSTGRES_DB=tpdb `
+  -p 5432:5432 `
+  -v $(Get-Location)/init:/docker-entrypoint-initdb.d `
+  postgres:15
+```
+
+- [ ] 🐧 *nix
+
 ```bash
 docker run -d \
   --name tp_postgres \
