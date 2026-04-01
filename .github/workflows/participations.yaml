@@ -86,6 +86,13 @@ jobs:
           cd 7.PLSQL
           pwsh .scripts/run.ps1
           cd ..
+          ##
+          ## Evaluating chapter 8.NoSQL
+          ## 
+          echo "Evaluating chapter 8.NoSQL Participation"
+          cd 8.NoSQL
+          pwsh .scripts/run.ps1
+          cd ..
 
       - name: Commit files
         run: |

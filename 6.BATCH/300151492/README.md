@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🗄️ TP Batch — PowerShell & PostgreSQL
+#  TP Batch — PowerShell & PostgreSQL
 
 <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=22&pause=1000&color=00F7FF&center=true&vCenter=true&width=750&lines=Chargement+automatique+de+PostgreSQL;Scripts+SQL+%3A+DDL+%7C+DML+%7C+DCL+%7C+DQL;PowerShell+%2B+Docker+%2B+PostgreSQL+%F0%9F%90%B3" />
 
@@ -20,7 +20,7 @@
 
 ---
 
-## 📚 Table des matières
+##  Table des matières
 
 - [🎯 Objectifs](#-objectifs)
 - [📁 Structure du projet](#-structure-du-projet)
@@ -35,7 +35,7 @@
 
 ---
 
-## 🎯 Objectifs
+##  Objectifs
 
 | # | Objectif | Statut |
 |---|----------|--------|
@@ -47,7 +47,7 @@
 
 ---
 
-## 📁 Structure du projet
+##  Structure du projet
 
 ```
 📦 lab-batch/
@@ -60,11 +60,11 @@
  ┗ 📄 README.md
 ```
 
-> ⚠️ **Ordre d'exécution obligatoire :** `DDL` → `DML` → `DCL` → `DQL`
+>  **Ordre d'exécution obligatoire :** `DDL` → `DML` → `DCL` → `DQL`
 
 ---
 
-## 🗂️ Types de scripts SQL
+##  Types de scripts SQL
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -83,7 +83,7 @@
 
 ---
 
-## 🐳 Démarrer avec Docker
+##  Démarrer avec Docker
 
 ### 1. Lancer le conteneur PostgreSQL
 
@@ -115,7 +115,7 @@ a1b2c3d4e5f6   postgres   Up 5 secs    0.0.0.0:5432->5432/tcp   postgres-lab
 
 ---
 
-## ⚡ Exécution rapide
+##  Exécution rapide
 
 ```powershell
 # Étape 1 — Autoriser les scripts
@@ -130,7 +130,7 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
 
 ---
 
-## 📝 Scripts SQL
+##  Scripts SQL
 
 <details>
 <summary><b>🏗️ DDL.sql — Création des tables</b></summary>
@@ -211,7 +211,7 @@ ORDER BY e.nom;
 
 ---
 
-## 🔧 Script PowerShell
+##  Script PowerShell
 
 ```powershell
 # ============================================================
@@ -270,7 +270,7 @@ Write-Log "Termine en $([math]::Round($duree, 2)) secondes!"
 
 ---
 
-## 📊 Résultat
+##  Résultat
 
 ```
 [14:19:11] Demarrage du chargement...
@@ -307,14 +307,14 @@ GRANT
 
 ---
 
-## 🏆 Fonctionnalités bonus
+##  Fonctionnalités bonus
 
-### 🧩 1. Conteneur en paramètre
+###  1. Conteneur en paramètre
 ```powershell
 .\load-db.ps1 mon-conteneur
 ```
 
-### 📋 2. Fichier log horodaté — `execution.log`
+###  2. Fichier log horodaté — `execution.log`
 ```
 [14:19:11] Demarrage du chargement...
 [14:19:11] Execution de DDL.sql
@@ -324,12 +324,12 @@ GRANT
 [14:19:13] Termine en 1.97 secondes!
 ```
 
-### ⏱️ 3. Temps d'exécution
+###  3. Temps d'exécution
 Le script affiche automatiquement le temps total d'exécution en secondes.
 
 ---
 
-## ✅ Vérification
+##  Vérification
 
 Se connecter dans le conteneur :
 
@@ -347,7 +347,7 @@ SELECT * FROM cours;
 
 ---
 
-## 📌 Conclusion
+##  Conclusion
 
 Ce laboratoire démontre comment automatiser le chargement d'une base de données PostgreSQL avec PowerShell et Docker. Les quatre types de scripts SQL ont été exécutés avec succès en moins de **2 secondes**, avec journalisation complète dans `execution.log`.
 
