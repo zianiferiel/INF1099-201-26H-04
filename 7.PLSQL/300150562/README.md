@@ -72,6 +72,9 @@ CALL inscrire_etudiant_cours('ali@email.com', 'Math');
 SELECT * FROM logs;
 
 
-<img width="975" height="468" alt="image" src="https://github.com/user-attachments/assets/52a7b8d2-b8aa-4470-9138-10f99db4877d" />
+
+
+<img width="975" height="468" alt="image" src="https://github.com/user-attachments/assets/3b1d26e2-15c8-4fbd-a1b0-8fb789b01771" />
+
 
 
