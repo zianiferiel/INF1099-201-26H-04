@@ -33,6 +33,7 @@ L’objectif est de manipuler la logique métier directement dans la base de don
 ### ▶️ Démarrer PostgreSQL
 ```bash
 docker run -d --name tp_postgres -e POSTGRES_USER=etudiant -e POSTGRES_PASSWORD=etudiant -e POSTGRES_DB=tpdb -p 5432:5432 -v ${PWD}/init:/docker-entrypoint-initdb.d postgres:15
+```
 
 🗄️ Base de données
 etudiants → informations étudiants
@@ -56,6 +57,7 @@ Validation automatique avant insertion
 Logging automatique des actions
 Tests
 
+```
 -- Ajouter étudiant
 CALL ajouter_etudiant('Ali', 22, 'ali@email.com');
 
