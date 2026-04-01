@@ -1,50 +1,34 @@
-$docker = "C:\Program Files\Docker\Docker\resources\bin\docker.exe"
+# ---------------------------------------
+# Script PowerShell pour charger PostgreSQL
+# ---------------------------------------
 
-$container = "postgres-maillot"
-$db = "boutique_maillots"
-$user = "postgres"
+$Container = "postgres-lab"
+$Database  = "ecole"
+$User      = "postgres"
 
-# fichier log en TXT
-$log = "execution.txt"
+$Files = @(
+    "DDL.sql",
+    "DML.sql",
+    "DCL.sql",
+    "DQL.sql"
+)
 
-Start-Transcript -Path $log -Append
+Write-Output "Chargement de la base de données..."
 
-Write-Host "[START] Debut du chargement..."
+foreach ($file in $Files) {
 
-$running = & $docker ps --format "{{.Names}}"
-if ($running -notcontains $container) {
-    Write-Host "[ERROR] Conteneur non actif"
-    Stop-Transcript
-    exit
-}
+    if (Test-Path $file) {
 
-Write-Host "[INFO] Copie des fichiers..."
-& $docker cp DDL.sql ${container}:/DDL.sql
-& $docker cp DML.sql ${container}:/DML.sql
-& $docker cp DCL.sql ${container}:/DCL.sql
-& $docker cp DQL.sql ${container}:/DQL.sql
+        Write-Output "Execution de $file"
 
-function Run-SQL($file) {
-    Write-Host "[INFO] Execution $file"
+        Get-Content $file | docker exec -i $Container psql -U $User -d $Database
 
-    $result = & $docker exec -i $container psql -U $user -d $db -f "/$file" 2>&1
+    }
+    else {
 
-    $result | ForEach-Object {
-        Write-Host $_
+        Write-Output "ERREUR : fichier $file introuvable"
     }
 
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "[ERROR] Probleme dans $file"
-        Stop-Transcript
-        exit
-    }
 }
 
-Run-SQL "DDL.sql"
-Run-SQL "DML.sql"
-Run-SQL "DCL.sql"
-Run-SQL "DQL.sql"
-
-Write-Host "[OK] Termine avec succes !"
-
-Stop-Transcript
+Write-Output "Chargement terminé."

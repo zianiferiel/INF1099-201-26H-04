@@ -30,8 +30,9 @@ docker container run -d `
   -v postgres_airline_data:/var/lib/postgresql/data `
   postgres:16
 ```
+ ![wait](https://github.com/user-attachments/assets/f3fef0c9-0a50-4cc4-a4ba-da758a8115d8)
 
-> 📸 **Capture :** conteneur en cours d'exécution avec `docker container ls`
+
 
 ---
 
@@ -42,7 +43,7 @@ docker version
 ```
 
 > 📸 **Capture :** Docker en fonctionnement
-
+![wait](https://github.com/user-attachments/assets/f09000b8-61c9-4038-aab1-822217943d80)
 ---
 
 ## 🔗 3. Connexion à PostgreSQL
@@ -52,6 +53,8 @@ docker exec -it postgres-airline psql -U postgres -d airline_db
 ```
 
 > 📸 **Capture :** connexion réussie avec `airline_db=#`
+>![wait](https://github.com/user-attachments/assets/bf4d91dd-ff1c-460d-9908-0b472b13eeca)
+
 
 ---
 
@@ -74,6 +77,7 @@ Création des tables pour le système de gestion d'une compagnie aérienne :
 | 11 | `porte` | Portes d'embarquement |
 
 > 📸 **Capture :** résultat de la commande `\dt`
+<![wait](https://github.com/user-attachments/assets/972d7b8c-f34f-482c-ae25-c50954601bbd)
 
 ---
 
@@ -84,6 +88,7 @@ Création des tables pour le système de gestion d'une compagnie aérienne :
 ```
 
 > 📸 **Capture :** structure de la table `passager`
+![wait](https://github.com/user-attachments/assets/75a08299-5fc6-4033-9536-e1080dcc6e75)
 
 ---
 
@@ -95,6 +100,7 @@ VALUES ('Tidjet', 'Stephane', '4370001111', 'stephane@email.com', 'P12345678');
 ```
 
 > 📸 **Capture :** données insérées avec `SELECT * FROM passager;`
+<![wait](https://github.com/user-attachments/assets/17848717-e9df-48e8-8b81-56ea19c490ef)
 
 ---
 
@@ -105,6 +111,7 @@ SELECT * FROM vol;
 ```
 
 > 📸 **Capture :** données des vols
+<![wait](https://github.com/user-attachments/assets/cc1c66a0-40ce-4d67-87f2-6c147b2bdc2f)
 
 ---
 
@@ -123,6 +130,7 @@ JOIN vol v ON b.vol_id = v.id;
 ```
 
 > 📸 **Capture :** résultat de la requête JOIN
+![wait](https://github.com/user-attachments/assets/ca0f7ef7-2032-46e1-bbf3-3c7fe2cde988)
 
 ---
 
@@ -149,17 +157,10 @@ Databases → airline_db → Schemas → public → Tables
 ```
 
 > 📸 **Capture :** liste des tables
+<![wait](https://github.com/user-attachments/assets/3f5972e2-6fec-4bfc-b5b7-777d0887b5ca)
 
----
 
-## 👀 11. Visualisation des données
-
-**Action :**
-> Click droit → **View/Edit Data** → **All Rows**
-
-> 📸 **Capture :** affichage des données
-
----
+ 
 
 ## ✅ Conclusion
 

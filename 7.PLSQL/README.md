@@ -1,5 +1,7 @@
 # 📝 Leçon - Languages Procéduraux
 
+[:tada: Participation](.scripts/Participation.md)
+
 * **PL/SQL** (Procedural Language / SQL) a été **développé et popularisé par Oracle** dans les années **1980** pour ajouter des capacités procédurales à SQL.
 
 * Avant PL/SQL, SQL était **strictement déclaratif**, donc limité pour :
@@ -252,7 +254,7 @@ END;
 ## 1️⃣ Structure du projet
 
 ```
-tp-postgresql-simple/
+🆔/
 │
 ├── init/
 │   ├── 01-ddl.sql

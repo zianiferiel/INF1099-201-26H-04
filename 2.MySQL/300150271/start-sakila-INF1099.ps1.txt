@@ -1,0 +1,5 @@
+$projectDir = "C:\Users\User\Developer\INF1099-201-26H-04\2.MySQL\300150271"
+
+docker run -d --name INF1099-mysql -e MYSQL_ROOT_PASSWORD=rootpass -p 3306:3306 mysql:8.0
+
+docker exec -it INF1099-mysql mysql -u root -prootpass -e "CREATE DATABASE sakila;"
