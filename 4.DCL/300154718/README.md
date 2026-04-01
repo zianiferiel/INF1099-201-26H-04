@@ -45,6 +45,7 @@ Connexion en tant qu'administrateur `postgres` via le conteneur Podman.
 ```bash
 podman exec -it postgres psql -U postgres
 ```
+![wait](https://github.com/user-attachments/assets/0504bb4e-474f-434c-ba28-58ddc17d46db)
 
 ---
 
@@ -54,6 +55,7 @@ podman exec -it postgres psql -U postgres
 CREATE DATABASE airline;
 \c airline
 ```
+![wait](https://github.com/user-attachments/assets/273b66c6-94e8-46c4-bd6d-2345aceb8661)
 
 ---
 
@@ -62,6 +64,7 @@ CREATE DATABASE airline;
 ```sql
 CREATE SCHEMA tp_dcl;
 ```
+![wait](https://github.com/user-attachments/assets/cc282b78-effb-417a-b8ac-34f9bdbf7358)
 
 ---
 
@@ -83,6 +86,7 @@ CREATE TABLE tp_dcl.passager (
 ```sql
 \dt tp_dcl.*
 ```
+![wait](https://github.com/user-attachments/assets/ef68775a-d568-47e8-a2fe-e0e9a6961357)
 
 ---
 
@@ -92,6 +96,7 @@ CREATE TABLE tp_dcl.passager (
 CREATE USER etudiant   WITH PASSWORD 'etudiant123';
 CREATE USER professeur WITH PASSWORD 'prof123';
 ```
+![wait](https://github.com/user-attachments/assets/3a29241d-6f18-4a51-9a58-637e1724c1bc)
 
 ---
 
@@ -124,6 +129,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON tp_dcl.passager TO professeur;
 ```sql
 GRANT USAGE, SELECT, UPDATE ON SEQUENCE tp_dcl.passager_id_passager_seq TO professeur;
 ```
+![wait](https://github.com/user-attachments/assets/80c5ae4b-61a0-44d8-9b51-87a6b373445e)
 
 ---
 
@@ -216,6 +222,8 @@ ERROR: permission denied for table passager
 > La permission a bien été retirée — l'accès en lecture est maintenant bloqué.
 
 ---
+![wait](https://github.com/user-attachments/assets/39cb6a0a-a28a-4042-ae6b-f4d72ff50a67)
+
 
 ## À retenir
 
