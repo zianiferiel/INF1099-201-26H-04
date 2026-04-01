@@ -1,92 +1,26 @@
--- ============================================================
--- 1️⃣ Procédure : ajouter_etudiant
--- ============================================================
+-- Tables principales
+CREATE TABLE IF NOT EXISTS etudiants (
+    id SERIAL PRIMARY KEY,
+    nom TEXT NOT NULL,
+    age INT,
+    email TEXT UNIQUE,
+    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-CREATE OR REPLACE PROCEDURE ajouter_etudiant(nom TEXT, age INT, email TEXT)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-    -- Validation âge
-    IF age < 18 THEN
-        RAISE EXCEPTION 'Age invalide pour %', nom;
-    END IF;
+CREATE TABLE IF NOT EXISTS logs (
+    id SERIAL PRIMARY KEY,
+    action TEXT,
+    date_action TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-    -- Validation email
-    IF email !~* '^[^@]+@[^@]+\.[^@]+$' THEN
-        RAISE EXCEPTION 'Email invalide pour %', nom;
-    END IF;
+CREATE TABLE IF NOT EXISTS cours (
+    id SERIAL PRIMARY KEY,
+    nom TEXT UNIQUE NOT NULL
+);
 
-    -- Insertion
-    INSERT INTO etudiants(nom, age, email)
-    VALUES (nom, age, email);
-
-    -- Log manuel
-    INSERT INTO logs(action)
-    VALUES ('Ajout étudiant : ' || nom);
-
-    -- Message succès
-    RAISE NOTICE 'Etudiant ajouté avec succès : %', nom;
-
-EXCEPTION
-    WHEN others THEN
-        RAISE NOTICE 'Erreur lors de l’ajout : %', SQLERRM;
-END;
-$$;
-
-
--- ============================================================
--- 2️⃣ Fonction : nombre_etudiants
--- ============================================================
-
-CREATE OR REPLACE FUNCTION nombre_etudiants()
-RETURNS INT
-LANGUAGE plpgsql
-AS $$
-DECLARE
-    total INT;
-BEGIN
-    SELECT COUNT(*) INTO total FROM etudiants;
-    RETURN total;
-END;
-$$;
-
-
--- ============================================================
--- 3️⃣ Trigger : validation âge
--- ============================================================
-
-CREATE OR REPLACE FUNCTION verifier_age()
-RETURNS trigger AS $$
-BEGIN
-    IF NEW.age < 18 THEN
-        RAISE EXCEPTION 'Age invalide (trigger) pour %', NEW.nom;
-    END IF;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_verifier_age
-BEFORE INSERT ON etudiants
-FOR EACH ROW
-EXECUTE FUNCTION verifier_age();
-
-
--- ============================================================
--- 4️⃣ Trigger : log automatique
--- ============================================================
-
-CREATE OR REPLACE FUNCTION log_etudiant()
-RETURNS trigger AS $$
-BEGIN
-    INSERT INTO logs(action)
-    VALUES ('Ajout automatique : ' || NEW.nom);
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_log_etudiant
-AFTER INSERT ON etudiants
-FOR EACH ROW
-EXECUTE FUNCTION log_etudiant();
+CREATE TABLE IF NOT EXISTS inscriptions (
+    id SERIAL PRIMARY KEY,
+    etudiant_id INT REFERENCES etudiants(id),
+    cours_id INT REFERENCES cours(id),
+    date_inscription TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
