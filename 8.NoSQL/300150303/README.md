@@ -31,7 +31,7 @@ docker run --name postgres-nosql `
   -d postgres
 ```
 
-![docker run](images/Screenshot_2026-04-02_111253.png)
+![docker run](images/Screenshot-2026-04-02-111253.png)
 
 ---
 
