@@ -3,183 +3,302 @@
 -- TP PostgreSQL : Fonctions, Procédures Stockées et Triggers
 -- ==================================================================================
 
+
 -- ============================================================
--- 1️⃣ Procédure : ajouter_etudiant
+-- 1️⃣  Procédure : ajouter_etudiant
+-- ============================================================
+-- Objectif : Ajouter un étudiant avec validations et journalisation
+--
+-- Validations :
+--   - age >= 18
+--   - email au format valide (regex)
+--   - email unique (géré aussi par contrainte UNIQUE, mais on lève une erreur claire)
+--
+-- Comportement :
+--   - RAISE NOTICE en cas de succès
+--   - RAISE NOTICE avec le message d'erreur en cas d'échec (l'exception est relancée
+--     pour que l'appelant puisse la capter dans test.sql)
 -- ============================================================
 
-CREATE OR REPLACE PROCEDURE ajouter_etudiant(nom TEXT, age INT, email TEXT)
+CREATE OR REPLACE PROCEDURE ajouter_etudiant(p_nom TEXT, p_age INT, p_email TEXT)
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- Validation âge
-    IF age < 18 THEN
-        RAISE EXCEPTION 'Age invalide pour % (doit être >= 18)', nom;
+    -- ── Validation de l'âge ───────────────────────────────────────────────────
+    IF p_age < 18 THEN
+        RAISE EXCEPTION 'Âge invalide (%) pour % : l''étudiant doit avoir au moins 18 ans.',
+            p_age, p_nom;
     END IF;
 
-    -- Validation email format
-    IF email !~* '^[^@]+@[^@]+\.[^@]+$' THEN
-        RAISE EXCEPTION 'Email invalide pour %', nom;
+    -- ── Validation du format email (regex simple) ─────────────────────────────
+    IF p_email !~* '^[^@\s]+@[^@\s]+\.[^@\s]+$' THEN
+        RAISE EXCEPTION 'Email invalide (%) pour %.', p_email, p_nom;
     END IF;
 
-    -- Vérification unicité email
-    IF EXISTS (SELECT 1 FROM etudiants WHERE email = email) THEN
-        RAISE EXCEPTION 'Email déjà utilisé : %', email;
+    -- ── Vérification unicité de l'email ──────────────────────────────────────
+    IF EXISTS (SELECT 1 FROM etudiants WHERE email = p_email) THEN
+        RAISE EXCEPTION 'L''email % est déjà utilisé par un autre étudiant.', p_email;
     END IF;
 
-    -- Insertion
-    INSERT INTO etudiants(nom, age, email)
-    VALUES (nom, age, email);
+    -- ── Insertion ─────────────────────────────────────────────────────────────
+    INSERT INTO etudiants (nom, age, email)
+    VALUES (p_nom, p_age, p_email);
 
-    -- Log
-    INSERT INTO logs(action)
-    VALUES ('Ajout étudiant : ' || nom);
+    -- ── Journalisation manuelle (complète le trigger automatique) ─────────────
+    INSERT INTO logs (action)
+    VALUES ('PROCEDURE ajouter_etudiant → étudiant ajouté : ' || p_nom
+            || ' (email: ' || p_email || ', âge: ' || p_age || ')');
 
-    -- Message succès
-    RAISE NOTICE 'Succès : étudiant ajouté -> % (% ans)', nom, age;
+    -- ── Confirmation ──────────────────────────────────────────────────────────
+    RAISE NOTICE '[OK] Étudiant ajouté avec succès : % (email: %, âge: %)',
+        p_nom, p_email, p_age;
 
 EXCEPTION
     WHEN others THEN
-        RAISE NOTICE 'Erreur ajout étudiant [%] : %', nom, SQLERRM;
+        -- Log de l'erreur puis on la remonte à l'appelant
+        RAISE NOTICE '[ERREUR] Impossible d''ajouter % : %', p_nom, SQLERRM;
+        RAISE;   -- relance l'exception pour que test.sql puisse la catcher
 END;
 $$;
 
+
 -- ============================================================
--- 2️⃣ Fonction : nombre_etudiants_par_age
+-- 2️⃣  Fonction : nombre_etudiants_par_age
+-- ============================================================
+-- Retourne le nombre d'étudiants dont l'âge est compris dans [min_age, max_age].
+-- Retourne 0 si la tranche est vide ou invalide.
 -- ============================================================
 
-CREATE OR REPLACE FUNCTION nombre_etudiants_par_age(min_age INT, max_age INT)
+CREATE OR REPLACE FUNCTION nombre_etudiants_par_age(p_min_age INT, p_max_age INT)
 RETURNS INT
 LANGUAGE plpgsql
 AS $$
 DECLARE
-    total INT;
+    v_total INT;
 BEGIN
-    -- Validation des paramètres
-    IF min_age > max_age THEN
-        RAISE EXCEPTION 'Intervalle invalide (% > %)', min_age, max_age;
+    -- ── Validation de la tranche ──────────────────────────────────────────────
+    IF p_min_age > p_max_age THEN
+        RAISE NOTICE '[AVERTISSEMENT] min_age (%) > max_age (%) → résultat sera 0.',
+            p_min_age, p_max_age;
+        RETURN 0;
     END IF;
 
-    SELECT COUNT(*) INTO total
-    FROM etudiants
-    WHERE age BETWEEN min_age AND max_age;
+    -- ── Comptage ──────────────────────────────────────────────────────────────
+    SELECT COUNT(*)
+      INTO v_total
+      FROM etudiants
+     WHERE age BETWEEN p_min_age AND p_max_age;
 
-    RETURN total;
+    RAISE NOTICE '[INFO] Étudiants entre % et % ans : %', p_min_age, p_max_age, v_total;
+    RETURN v_total;
 END;
 $$;
 
+
 -- ============================================================
--- 3️⃣ Procédure : inscrire_etudiant_cours
+-- 2️⃣ bis  Fonction : nombre_etudiants  (alias sans paramètres)
+-- ============================================================
+-- Retourne le nombre total d'étudiants (utilisée dans test.sql).
 -- ============================================================
 
-CREATE OR REPLACE PROCEDURE inscrire_etudiant_cours(etudiant_email TEXT, cours_nom TEXT)
+CREATE OR REPLACE FUNCTION nombre_etudiants()
+RETURNS INT
 LANGUAGE plpgsql
 AS $$
 DECLARE
-    etudiant_id INT;
-    cours_id INT;
+    v_total INT;
 BEGIN
-    -- Récupération étudiant
-    SELECT id INTO etudiant_id 
-    FROM etudiants 
-    WHERE email = etudiant_email;
-
-    IF etudiant_id IS NULL THEN
-        RAISE EXCEPTION 'Etudiant non trouvé : %', etudiant_email;
-    END IF;
-
-    -- Récupération cours
-    SELECT id INTO cours_id 
-    FROM cours 
-    WHERE nom = cours_nom;
-
-    IF cours_id IS NULL THEN
-        RAISE EXCEPTION 'Cours non trouvé : %', cours_nom;
-    END IF;
-
-    -- Vérifier inscription existante
-    IF EXISTS (
-        SELECT 1 
-        FROM inscriptions 
-        WHERE etudiant_id = etudiant_id 
-        AND cours_id = cours_id
-    ) THEN
-        RAISE EXCEPTION 'Déjà inscrit à ce cours';
-    END IF;
-
-    -- Insertion
-    INSERT INTO inscriptions(etudiant_id, cours_id)
-    VALUES (etudiant_id, cours_id);
-
-    -- Log
-    INSERT INTO logs(action)
-    VALUES ('Inscription : ' || etudiant_email || ' -> ' || cours_nom);
-
-    RAISE NOTICE 'Inscription réussie : % -> %', etudiant_email, cours_nom;
-
-EXCEPTION
-    WHEN others THEN
-        RAISE NOTICE 'Erreur inscription [% -> %] : %', etudiant_email, cours_nom, SQLERRM;
+    SELECT COUNT(*) INTO v_total FROM etudiants;
+    RAISE NOTICE '[INFO] Nombre total d''étudiants : %', v_total;
+    RETURN v_total;
 END;
 $$;
 
+
 -- ============================================================
--- 4️⃣ Trigger validation étudiant
+-- 3️⃣  Procédure : inscrire_etudiant_cours
+-- ============================================================
+-- Objectif : Inscrire un étudiant à un cours avec vérifications complètes.
+--
+-- Vérifications :
+--   - L'étudiant existe (par email)
+--   - Le cours existe (par nom)
+--   - L'inscription n'est pas déjà présente
+-- ============================================================
+
+CREATE OR REPLACE PROCEDURE inscrire_etudiant_cours(p_email TEXT, p_cours_nom TEXT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_etudiant_id INT;
+    v_cours_id    INT;
+    v_etudiant_nom TEXT;
+BEGIN
+    -- ── Récupération de l'étudiant ────────────────────────────────────────────
+    SELECT id, nom
+      INTO v_etudiant_id, v_etudiant_nom
+      FROM etudiants
+     WHERE email = p_email;
+
+    IF v_etudiant_id IS NULL THEN
+        RAISE EXCEPTION 'Aucun étudiant trouvé avec l''email %.', p_email;
+    END IF;
+
+    -- ── Récupération du cours ─────────────────────────────────────────────────
+    SELECT id
+      INTO v_cours_id
+      FROM cours
+     WHERE nom = p_cours_nom;
+
+    IF v_cours_id IS NULL THEN
+        RAISE EXCEPTION 'Cours introuvable : %.', p_cours_nom;
+    END IF;
+
+    -- ── Vérification de doublon ───────────────────────────────────────────────
+    IF EXISTS (
+        SELECT 1
+          FROM inscriptions
+         WHERE etudiant_id = v_etudiant_id
+           AND cours_id    = v_cours_id
+    ) THEN
+        RAISE EXCEPTION '% (%) est déjà inscrit au cours "%".',
+            v_etudiant_nom, p_email, p_cours_nom;
+    END IF;
+
+    -- ── Insertion ─────────────────────────────────────────────────────────────
+    INSERT INTO inscriptions (etudiant_id, cours_id)
+    VALUES (v_etudiant_id, v_cours_id);
+
+    -- ── Journalisation ────────────────────────────────────────────────────────
+    INSERT INTO logs (action)
+    VALUES ('PROCEDURE inscrire_etudiant_cours → ' || v_etudiant_nom
+            || ' (' || p_email || ') inscrit au cours : ' || p_cours_nom);
+
+    RAISE NOTICE '[OK] Inscription réussie : % → cours "%"', v_etudiant_nom, p_cours_nom;
+
+EXCEPTION
+    WHEN others THEN
+        RAISE NOTICE '[ERREUR] Inscription échouée (% / %) : %',
+            p_email, p_cours_nom, SQLERRM;
+        RAISE;
+END;
+$$;
+
+
+-- ============================================================
+-- 4️⃣  Trigger : validation BEFORE INSERT sur etudiants
+-- ============================================================
+-- Empêche toute insertion directe (hors procédure) avec âge < 18 ou email invalide.
+-- Ce trigger protège la table même si quelqu'un insère sans passer par la procédure.
 -- ============================================================
 
 CREATE OR REPLACE FUNCTION valider_etudiant()
 RETURNS trigger AS $$
 BEGIN
-    IF NEW.age < 18 THEN
-        RAISE EXCEPTION 'Age invalide (% ans) pour %', NEW.age, NEW.nom;
+    -- ── Contrôle de l'âge ─────────────────────────────────────────────────────
+    IF NEW.age IS NOT NULL AND NEW.age < 18 THEN
+        RAISE EXCEPTION '[TRIGGER valider_etudiant] Âge invalide (%) pour % : minimum 18 ans requis.',
+            NEW.age, NEW.nom;
     END IF;
 
-    IF NEW.email !~* '^[^@]+@[^@]+\.[^@]+$' THEN
-        RAISE EXCEPTION 'Email invalide pour % : %', NEW.nom, NEW.email;
+    -- ── Contrôle du format email ──────────────────────────────────────────────
+    IF NEW.email IS NOT NULL AND NEW.email !~* '^[^@\s]+@[^@\s]+\.[^@\s]+$' THEN
+        RAISE EXCEPTION '[TRIGGER valider_etudiant] Email invalide (%) pour %.',
+            NEW.email, NEW.nom;
     END IF;
 
+    -- Si tout est valide, on laisse passer la ligne
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+-- On supprime le trigger s'il existe déjà (pour les re-exécutions)
+DROP TRIGGER IF EXISTS trg_valider_etudiant ON etudiants;
 
 CREATE TRIGGER trg_valider_etudiant
 BEFORE INSERT ON etudiants
 FOR EACH ROW
 EXECUTE FUNCTION valider_etudiant();
 
+
 -- ============================================================
--- 5️⃣ Trigger log avancé
+-- 5️⃣  Trigger : log automatique sur etudiants et inscriptions
+-- ============================================================
+-- Journalise chaque INSERT, UPDATE et DELETE avec les données OLD/NEW.
 -- ============================================================
 
 CREATE OR REPLACE FUNCTION log_action()
 RETURNS trigger AS $$
 DECLARE
-    info TEXT;
+    v_detail TEXT;
 BEGIN
-    IF TG_OP = 'INSERT' THEN
-        info := 'INSERT ' || TG_TABLE_NAME || ' -> ' || COALESCE(NEW.nom::text, 'N/A');
-        INSERT INTO logs(action) VALUES (info);
-        RETURN NEW;
+    -- ── Construction du message selon l'opération ─────────────────────────────
+    CASE TG_OP
 
-    ELSIF TG_OP = 'UPDATE' THEN
-        info := 'UPDATE ' || TG_TABLE_NAME || ' : ' || 
-                COALESCE(OLD.nom::text, 'N/A') || ' -> ' || COALESCE(NEW.nom::text, 'N/A');
-        INSERT INTO logs(action) VALUES (info);
-        RETURN NEW;
+        WHEN 'INSERT' THEN
+            -- On affiche les colonnes pertinentes selon la table
+            IF TG_TABLE_NAME = 'etudiants' THEN
+                v_detail := 'nouveau étudiant → id=' || NEW.id
+                         || ', nom=' || NEW.nom
+                         || ', age=' || NEW.age
+                         || ', email=' || NEW.email;
+            ELSIF TG_TABLE_NAME = 'inscriptions' THEN
+                v_detail := 'nouvelle inscription → etudiant_id=' || NEW.etudiant_id
+                         || ', cours_id=' || NEW.cours_id;
+            ELSE
+                v_detail := 'id=' || NEW.id;
+            END IF;
 
-    ELSIF TG_OP = 'DELETE' THEN
-        info := 'DELETE ' || TG_TABLE_NAME || ' -> ' || COALESCE(OLD.nom::text, 'N/A');
-        INSERT INTO logs(action) VALUES (info);
+        WHEN 'UPDATE' THEN
+            IF TG_TABLE_NAME = 'etudiants' THEN
+                v_detail := 'modification étudiant id=' || NEW.id
+                         || ' | avant: nom=' || OLD.nom || ', age=' || OLD.age
+                         || ' | après: nom=' || NEW.nom || ', age=' || NEW.age;
+            ELSIF TG_TABLE_NAME = 'inscriptions' THEN
+                v_detail := 'modification inscription id=' || NEW.id;
+            ELSE
+                v_detail := 'id=' || NEW.id;
+            END IF;
+
+        WHEN 'DELETE' THEN
+            IF TG_TABLE_NAME = 'etudiants' THEN
+                v_detail := 'suppression étudiant id=' || OLD.id
+                         || ', nom=' || OLD.nom
+                         || ', email=' || OLD.email;
+            ELSIF TG_TABLE_NAME = 'inscriptions' THEN
+                v_detail := 'suppression inscription id=' || OLD.id
+                         || ', etudiant_id=' || OLD.etudiant_id
+                         || ', cours_id=' || OLD.cours_id;
+            ELSE
+                v_detail := 'id=' || OLD.id;
+            END IF;
+
+        ELSE
+            v_detail := '(opération inconnue)';
+    END CASE;
+
+    -- ── Insertion dans la table logs ──────────────────────────────────────────
+    INSERT INTO logs (action)
+    VALUES ('[TRIGGER] ' || TG_OP || ' sur ' || TG_TABLE_NAME || ' → ' || v_detail);
+
+    -- Pour DELETE on retourne OLD, pour INSERT/UPDATE on retourne NEW
+    IF TG_OP = 'DELETE' THEN
         RETURN OLD;
     END IF;
-
-    RETURN NULL;
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
+-- Trigger sur etudiants
+DROP TRIGGER IF EXISTS trg_log_etudiant ON etudiants;
 CREATE TRIGGER trg_log_etudiant
 AFTER INSERT OR UPDATE OR DELETE ON etudiants
 FOR EACH ROW
 EXECUTE FUNCTION log_action();
 
+-- Trigger sur inscriptions
+DROP TRIGGER IF EXISTS trg_log_inscription ON inscriptions;
 CREATE TRIGGER trg_log_inscription
-AFTER INSERT OR UPDATE OR DELETE
+AFTER INSERT OR UPDATE OR DELETE ON inscriptions
+FOR EACH ROW
+EXECUTE FUNCTION log_action();
