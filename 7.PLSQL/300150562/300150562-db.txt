@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 NOTICE:  Etudiant ajouté : Ali
 NOTICE:  Erreur : Age invalide pour Bob
 CALL
-DO
-=======
-CALL
-NOTICE:  Etudiant ajouté : Ali
-NOTICE:  Erreur : Age invalide pour Bob
->>>>>>> efea9d87ee609cc778103aab2ab43154f47e5d02
 ERROR:  function nombre_etudiants() does not exist
 LINE 17: SELECT nombre_etudiants();
                 ^
