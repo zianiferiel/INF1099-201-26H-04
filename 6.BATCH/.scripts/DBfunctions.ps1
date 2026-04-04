@@ -71,7 +71,7 @@ function Test-LoadDB {
             # Check for errors in the generated file
             if (Test-Path "$StudentID-db.txt") {
                 $content = Get-Content "$StudentID-db.txt" -ErrorAction SilentlyContinue
-                $hasError = $content | Where-Object { $_ -match '(?i)error|Error|ERROR|exception|Exception' }
+                $hasError = $content | Where-Object { $_ -match '(?i)error|exception ' }
                 
                 if ($hasError) {
                     # Write-Host "Errors found in $StudentID-db.txt"
