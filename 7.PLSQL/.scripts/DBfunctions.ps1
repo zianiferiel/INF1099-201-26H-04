@@ -23,7 +23,7 @@ function Start-PostgresLab {
         -e POSTGRES_DB=tpdb `
         -p 5432:5432 `
         -v $(Get-Location)/init:/docker-entrypoint-initdb.d `
-        postgres:15 | Out-Null
+        postgres:15 2>$null | Out-Null
 }
 
 function Wait-PostgresReady {
@@ -45,7 +45,7 @@ function Wait-PostgresReady {
 }
 
 function Initialize-PostgresDatabase {
-    docker exec tp_postgres psql -U postgres -c "CREATE DATABASE ecole;" 2>$null | Out-Null
+    docker exec tp_postgres psql -U postgres -c "CREATE DATABASE tpdb;" 2>$null | Out-Null
 }
 
 function Stop-PostgresLab {
@@ -69,7 +69,8 @@ function Test-LoadDB {
 
         Push-Location $StudentID
         try {
-            pwsh ./load-db.ps1 *> "$StudentID-db.txt"
+            $sqlContent = Get-Content -Path "tests/test.sql" -RawGet-Content tests/test.sql
+            docker exec -i tp_postgres psql -U etudiant -d tpdb -c "$sqlContent" *> "$StudentID-db.txt"
             return ":heavy_check_mark:"
         }
         finally {
