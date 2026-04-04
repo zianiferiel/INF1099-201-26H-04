@@ -67,7 +67,6 @@ function Test-LoadDB {
         Push-Location $StudentID
         try {
             pwsh ./load-db.ps1 *> "$StudentID-db.txt"
-            return ":heavy_check_mark:"
 
             # Check for errors in the generated file
             if (Test-Path "$StudentID-db.txt") {
@@ -75,10 +74,12 @@ function Test-LoadDB {
                 $hasError = $content | Where-Object { $_ -match '(?i)error|Error|ERROR|exception|Exception' }
                 
                 if ($hasError) {
-                    # Write-Host "Errors found in $StudentID-db.txt"
+                    Write-Host "Errors found in $StudentID-db.txt"
                     return ":boom:"
                 }
             }
+
+            return ":heavy_check_mark:"
 
         }
         finally {

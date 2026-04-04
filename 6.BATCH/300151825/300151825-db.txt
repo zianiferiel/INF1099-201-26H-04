@@ -1,50 +1,26 @@
 Chargement de la base de données...
 Execution de DDL.sql
-<<<<<<< HEAD
 DROP TABLE
 DROP TABLE
-DROP TABLE
-=======
->>>>>>> e382af1eea8e6d62256f191c478ac6de0e74b268
 NOTICE:  table "avis" does not exist, skipping
-DROP TABLE
 NOTICE:  table "livraison" does not exist, skipping
+DROP TABLE
+DROP TABLE
 NOTICE:  table "paiement" does not exist, skipping
-<<<<<<< HEAD
-DROP TABLE
 NOTICE:  table "lignecommande" does not exist, skipping
-DROP TABLE
-NOTICE:  table "commande" does not exist, skipping
-DROP TABLE
-=======
-NOTICE:  table "lignecommande" does not exist, skipping
-DROP TABLE
-DROP TABLE
-DROP TABLE
 NOTICE:  table "commande" does not exist, skipping
 DROP TABLE
 DROP TABLE
->>>>>>> e382af1eea8e6d62256f191c478ac6de0e74b268
+DROP TABLE
+DROP TABLE
 NOTICE:  table "stock" does not exist, skipping
-DROP TABLE
 NOTICE:  table "crampon" does not exist, skipping
-DROP TABLE
-DROP TABLE
-DROP TABLE
-DROP TABLE
-DROP TABLE
 NOTICE:  table "categorie" does not exist, skipping
-<<<<<<< HEAD
-DROP TABLE
 DROP TABLE
 NOTICE:  table "marque" does not exist, skipping
 DROP TABLE
 NOTICE:  table "adresse" does not exist, skipping
 DROP TABLE
-=======
-NOTICE:  table "marque" does not exist, skipping
-NOTICE:  table "adresse" does not exist, skipping
->>>>>>> e382af1eea8e6d62256f191c478ac6de0e74b268
 NOTICE:  table "client" does not exist, skipping
 CREATE TABLE
 CREATE TABLE
