@@ -62,8 +62,8 @@ function Write-PresenceHeader {
     Write-Output "## :a: Présence"
     Write-Output ""
 
-    Write-Output "|:hash:| Boréal :id: | README.md | images | 01-ddl.sql | 02-dml.sql | 03-programmation.sql  | test.sql  |"
-    Write-Output "|------|-------------|-----------|--------|------------|------------|-----------------------|-----------|"
+    Write-Output "|:hash:| Boréal :id: | README.md | images | 01-ddl.sql | 02-dml.sql | 03-programmation.sql  | :mouse_trap: DB | :wood: log |"
+    Write-Output "|------|-------------|-----------|--------|------------|------------|-----------------------|-----------------|------------|"
 }
 
 
