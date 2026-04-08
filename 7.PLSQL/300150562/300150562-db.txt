@@ -1,6 +1,6 @@
 NOTICE:  Etudiant ajouté : Ali
-CALL
 NOTICE:  Erreur : Age invalide pour Bob
+CALL
 DO
 ERROR:  function nombre_etudiants() does not exist
 LINE 17: SELECT nombre_etudiants();
