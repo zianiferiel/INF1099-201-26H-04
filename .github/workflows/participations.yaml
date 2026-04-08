@@ -63,7 +63,8 @@ jobs:
           ## 
           echo "Evaluating chapter 4.DCL Participation"
           cd 4.DCL
-          bash .scripts/run.sh
+          # bash .scripts/run.sh
+          pwsh .scripts/run.ps1
           cd ..
           ##
           ## Evaluating chapter 5.ModelisationSQL
