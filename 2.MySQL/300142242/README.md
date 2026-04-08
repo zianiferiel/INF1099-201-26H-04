@@ -11,7 +11,8 @@ Ce projet consiste en la mise en place d'une infrastructure de base de données 
 ## Preuve de fonctionnement
 Voici le résultat de l'exécution du script d'automatisation, montrant la création des tables et l'insertion des données :
 
-![Capture d'écran de la base de données](./images/verification_moodle.png)
+<img width="1410" height="921" alt="image" src="https://github.com/user-attachments/assets/aefe6dc3-fe6f-4289-be0b-4aba7324ce24" />
+
 
 ## Instructions
 Pour lancer le projet, ouvrez PowerShell dans ce dossier et exécutez :
