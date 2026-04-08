@@ -1,17 +1,22 @@
-# Participation
 
-| Table des matières            | Description                                             |
-|-------------------------------|---------------------------------------------------------|
-| :a: [Présence](#a-présence)   | L'étudiant.e a fait son travail    :heavy_check_mark:   |
-| :b: [Précision](#b-précision) | L'étudiant.e a réussi son travail  :tada:               |
+Usage: pwsh[.exe] [-Login] [[-File] <filePath> [args]]
+                  [-Command { - | <script-block> [-args <arg-array>]
+                                | <string> [<CommandParameters>] } ]
+                  [-CommandWithArgs <string> [<CommandParameters>]
+                  [-ConfigurationName <string>] [-ConfigurationFile <filePath>]
+                  [-CustomPipeName <string>] [-EncodedCommand <Base64EncodedCommand>]
+                  [-ExecutionPolicy <ExecutionPolicy>] [-InputFormat {Text | XML}]
+                  [-Interactive] [-MTA] [-NoExit] [-NoLogo] [-NonInteractive] [-NoProfile]
+                  [-NoProfileLoadTime] [-OutputFormat {Text | XML}] 
+                  [-SettingsFile <filePath>] [-SSHServerMode] [-STA] 
+                  [-Version] [-WindowStyle <style>] 
+                  [-WorkingDirectory <directoryPath>]
 
-## Légende
+       pwsh[.exe] -h | -Help | -? | /?
 
-| Signe              | Signification                 |
-|--------------------|-------------------------------|
-| :heavy_check_mark: | Prêt à être corrigé           |
-| :x:                | Fichier inexistant            |
+PowerShell Online Help https://aka.ms/powershell-docs
 
+<<<<<<< HEAD
 ## :a: Présence
 
 |:hash:| Boréal :id: | README.md | images | DDL.sql | DML.sql | DQL.sql | DCL.sql | :mouse_trap: DB | :wood: log |
@@ -44,3 +49,6 @@
 | 25 | [300153747](../300153747/README.md) :point_right: [<image src='https://avatars0.githubusercontent.com/u/211754108?s=460&v=4' width=20 height=20></image>](https://github.com/madjou15) | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
 | 26 | [300154718](../300154718/README.md) :point_right: [<image src='https://avatars0.githubusercontent.com/u/243453409?s=460&v=4' width=20 height=20></image>](https://github.com/stephanetidjet) | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
 | :abacus: | \$\frac{2}{27}\$ = 7.41% | \$\displaystyle\sum_{i=1}^{27} s_i\$ = 2 |
+=======
+All parameters are case-insensitive.
+>>>>>>> 7976e4f372a24ed0000d5ec757770aa0ab9063c9
