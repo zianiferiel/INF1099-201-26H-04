@@ -1,18 +1,10 @@
 Chargement de la base de données...
 Execution de DDL.sql
-CREATE TABLE
+Error: no container with name or ID "postgres-lab" found: no such container
 Execution de DML.sql
-INSERT 0 5
+Error: no container with name or ID "postgres-lab" found: no such container
 Execution de DCL.sql
-GRANT
+Error: no container with name or ID "postgres-lab" found: no such container
 Execution de DQL.sql
- id |   nom   |    programme    
-----+---------+-----------------
-  1 | Alice   | Informatique
-  2 | Bob     | Réseau
-  3 | Charlie | Cybersécurité
-  4 | Diana   | Programmation
-  5 | Ethan   | Base de données
-(5 rows)
-
+Error: no container with name or ID "postgres-lab" found: no such container
 Chargement terminé.
