@@ -20,8 +20,8 @@ public | category       | table | postgres
 public | film           | table | postgres
 public | payment        | table | postgres
 ...
-```bash
-<img width="975" height="801" alt="image" src="https://github.com/user-attachments/assets/5258f377-7dde-492d-9ef4-e34885b3aaed" />
+```
+
 
 
 
