@@ -44,7 +44,6 @@ podman exec -it tp_postgres psql -U etudiant -d tpdb
 
 ```sql
 SELECT * FROM etudiants;
-SELECT COUNT(*) FROM etudiants;  -- 10
 ```
 <img width="829" height="440" alt="PLSQL2026" src="https://github.com/user-attachments/assets/53a9ac8e-ecea-46a5-b032-f17fdc2cc164" />
 
@@ -59,6 +58,12 @@ Chaque insertion dans `etudiants` génère automatiquement une entrée dans `log
 
 ---
 <img width="816" height="401" alt="PLSQL2027" src="https://github.com/user-attachments/assets/9ba19abb-df39-4725-b672-e0ad2ca5cfb1" />
+
+```sql
+
+SELECT COUNT(*) FROM etudiants;  -- 10
+```
+<img width="563" height="200" alt="PLSQL2028" src="https://github.com/user-attachments/assets/8c1b34cc-aaec-4977-85d8-f127ad6ed471" />
 
 
 ## 🔧 Technologies
