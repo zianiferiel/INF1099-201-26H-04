@@ -1,3 +1,4 @@
+Set-Content app.py -Encoding UTF8 -Value @"
 import psycopg2
 import json
 import os
@@ -7,19 +8,12 @@ conn = psycopg2.connect(
     user="postgres",
     password="postgres",
     host="localhost",
-    port=int(os.environ.get("DB_PORT", 5432))  # 5432 par défaut
-)
-conn = psycopg2.connect(
-    dbname="ecole",
-    user="postgres",
-    password="postgres",
-    host="localhost",
-    port=5433  # <-- ici, le port correct de ton Docker
+    port=int(os.environ.get("DB_PORT", 5432))
 )
 
 cur = conn.cursor()
 
-# 🔹 INSERT
+# INSERT
 nouvel_etudiant = {
     "nom": "Diana",
     "age": 28,
@@ -33,14 +27,14 @@ cur.execute(
 
 conn.commit()
 
-# 🔹 SELECT ALL
+# SELECT ALL
 print("\n📌 Tous les étudiants :")
 cur.execute("SELECT data FROM etudiants")
 
 for row in cur.fetchall():
     print(row[0])
 
-# 🔹 SEARCH
+# SEARCH
 print("\n🔎 Recherche Alice :")
 cur.execute("""
     SELECT data FROM etudiants
@@ -52,3 +46,4 @@ for row in cur.fetchall():
 
 cur.close()
 conn.close()
+"@
