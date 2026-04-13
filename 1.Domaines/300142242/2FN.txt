@@ -1,0 +1,13 @@
+ETUDIANT(id_etudiant,nom,prenom,email,telephone)
+
+PROFESSEUR(id_professeur,nom,prenom,email,nom_departement)
+
+SESSION(id_session,nom_session,date_debut,date_fin)
+
+COURS(id_cours,titre,description,credits,id_professeur)
+
+STATUT(id_statut,libelle)
+
+INSCRIPTION(id_inscription,date_inscription,id_etudiant,id_session,id_statut)
+
+DETAIL_INSCRIPTION(id_detail,id_inscription,id_cours,note_finale)

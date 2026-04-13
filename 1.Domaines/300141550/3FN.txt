@@ -1,0 +1,75 @@
+CLIENT
+id_client (PK)
+nom
+prenom
+post_nom
+telephone
+email (UNIQUE)
+date_creation
+
+ADRESSE
+id_adresse (PK)
+id_client (FK)
+numero_rue
+rue
+ville
+province
+pays
+code_postal
+
+PLAT
+id_plat (PK)
+id_categorie (FK)
+id_pays (FK)
+nom_plat
+description
+prix
+statut
+
+CATEGORIE
+id_categorie (PK)
+nom_categorie (UNIQUE)
+
+PAYS_ORIGINE
+id_pays (PK)
+nom_pays (UNIQUE)
+
+COMMANDE
+id_commande (PK)
+id_client (FK)
+id_adresse (FK)
+date_commande
+statut_commande
+total_commande (optionnel - dénormalisation contrôlée)
+
+LIGNE_COMMANDE
+id_commande (FK)
+id_plat (FK)
+quantite
+prix_unitaire
+PRIMARY KEY (id_commande, id_plat)
+
+
+PAIEMENT
+id_paiement (PK)
+id_commande (FK UNIQUE)
+date_paiement
+montant
+mode_paiement
+statut_paiement
+
+LIVRAISON
+id_livraison (PK)
+id_commande (FK UNIQUE)
+id_livreur (FK)
+date_livraison
+statut_livraison
+frais_livraison
+
+LIVREUR
+id_livreur (PK)
+nom
+prenom
+post_nom
+telephone
+email

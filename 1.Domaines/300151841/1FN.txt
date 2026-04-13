@@ -1,0 +1,21 @@
+========================
+DOMAINE: Tournois e-sport
+FORME: 1FN
+========================
+
+INSCRIPTION(
+  tournament_name,
+  team_name,
+  player_name,
+  match_date,
+  score
+)
+
+Règles 1FN respectées :
+- Chaque colonne contient une seule valeur
+- Pas de liste de joueurs ou de scores dans une cellule
+
+Limites :
+- player_name dépend de team_name
+- team_name dépend de tournament_name
+- Beaucoup de répétitions

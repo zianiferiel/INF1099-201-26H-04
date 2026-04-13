@@ -1,0 +1,10 @@
+Chargement base laboratoire...
+Execution de DDL.sql
+Error response from daemon: No such container: labo-postgres
+Execution de DML.sql
+Error response from daemon: No such container: labo-postgres
+Execution de DCL.sql
+Error response from daemon: No such container: labo-postgres
+Execution de DQL.sql
+Error response from daemon: No such container: labo-postgres
+Chargement terminé.

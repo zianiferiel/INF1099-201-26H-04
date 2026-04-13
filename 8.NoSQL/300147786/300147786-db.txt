@@ -1,0 +1,14 @@
+
+📌 Tous les étudiants :
+{'age': 25, 'nom': 'Alice', 'competences': ['Python', 'Docker']}
+{'age': 22, 'nom': 'Bob', 'competences': ['Java', 'SQL']}
+{'age': 30, 'nom': 'Charlie', 'competences': ['Linux', 'Bash', 'Python']}
+{'age': 27, 'nom': 'David', 'competences': ['C++', 'Git', 'Linux']}
+{'age': 24, 'nom': 'Emma', 'competences': ['JavaScript', 'React', 'CSS']}
+{'age': 29, 'nom': 'Fay', 'competences': ['SQL', 'Python', 'AWS']}
+{'age': 23, 'nom': 'George', 'competences': ['Docker', 'Kubernetes', 'Go']}
+{'age': 26, 'nom': 'Hana', 'competences': ['Python', 'Flask', 'PostgreSQL']}
+{'age': 28, 'nom': 'Diana', 'competences': ['DevOps', 'Kubernetes']}
+
+🔎 Recherche Alice :
+{'age': 25, 'nom': 'Alice', 'competences': ['Python', 'Docker']}

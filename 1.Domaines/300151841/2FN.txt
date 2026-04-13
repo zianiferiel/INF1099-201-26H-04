@@ -1,0 +1,38 @@
+========================
+DOMAINE: Tournois e-sport
+FORME: 2FN
+========================
+
+PLAYER(
+  player_name
+)
+
+TEAM(
+  team_name
+)
+
+TOURNAMENT(
+  tournament_name
+)
+
+MATCH(
+  tournament_name,
+  match_date
+)
+
+TEAM_PLAYER(
+  team_name,
+  player_name
+)
+
+MATCH_TEAM(
+  tournament_name,
+  match_date,
+  team_name,
+  score
+)
+
+Explication 2FN :
+- player_name n'est plus stocké avec tournament ou match
+- team_name n'est plus répété avec chaque joueur
+- Les tables TEAM_PLAYER et MATCH_TEAM servent uniquement à relier les entités

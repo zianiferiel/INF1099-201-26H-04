@@ -1,0 +1,46 @@
+========================
+DOMAINE: Tournois e-sport
+FORME: 3FN
+========================
+
+PLAYER(
+  player_id PK,
+  player_name
+)
+
+TEAM(
+  team_id PK,
+  team_name
+)
+
+TOURNAMENT(
+  tournament_id PK,
+  tournament_name,
+  start_date,
+  end_date
+)
+
+MATCH(
+  match_id PK,
+  tournament_id FK -> TOURNAMENT(tournament_id),
+  match_date,
+  round
+)
+
+TEAM_PLAYER(
+  team_id FK -> TEAM(team_id),
+  player_id FK -> PLAYER(player_id),
+  PK(team_id, player_id)
+)
+
+MATCH_TEAM(
+  match_id FK -> MATCH(match_id),
+  team_id FK -> TEAM(team_id),
+  score,
+  PK(match_id, team_id)
+)
+
+Explication 3FN:
+- Chaque table possède une clé primaire.
+- Les clés étrangères relient les entités.
+- Aucun attribut non-clé ne dépend d’un autre attribut non-clé.
