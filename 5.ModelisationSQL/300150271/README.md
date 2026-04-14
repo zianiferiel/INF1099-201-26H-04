@@ -2,12 +2,10 @@
 
 # 🏢 TP Modélisation SQL
 
-## Système de gestion des ventes d’appartements
+## Gestion des ventes d’appartements
 
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql\&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-Relationnel-orange)
-![Status](https://img.shields.io/badge/Status-Complété-success)
-![Étudiant](https://img.shields.io/badge/Étudiant-Mazigh_Bareche_300150271-lightgrey)
+**Nom : Mazigh Bareche**
+**Code étudiant : 300150271**
 
 </div>
 
@@ -15,48 +13,27 @@
 
 ## 📚 Table des matières
 
-* [🎯 Aperçu du projet](#-aperçu-du-projet)
-* [📁 Structure du projet](#-structure-du-projet)
-* [🔄 Normalisation](#-normalisation)
-* [📊 Diagramme ER](#-diagramme-er)
-* [🏗️ DDL — Définition des structures](#️-ddl--définition-des-structures)
-* [📝 DML — Manipulation des données](#-dml--manipulation-des-données)
-* [🔐 DCL — Contrôle des accès](#-dcl--contrôle-des-accès)
-* [⚡ Optimisation](#-optimisation)
-* [✅ Conclusion](#-conclusion)
+* Aperçu
+* Normalisation
+* Diagramme ER
+* DDL
+* DML
+* Captures
+* Conclusion
 
 ---
 
-## 🎯 Aperçu du projet
+## 🎯 Aperçu
 
-Ce projet consiste à concevoir une base de données pour gérer les ventes d’appartements dans des immeubles.
-
-Objectifs :
-
-* Modéliser les données
-* Appliquer la normalisation
-* Créer une base relationnelle
-* Manipuler les données avec SQL
-
----
-
-## 📁 Structure du projet
-
-```
-300150271/
-├── README.md
-├── ddl.sql
-├── dml.sql
-└── images/
-```
+Ce projet modélise un système de gestion des ventes d’appartements dans des immeubles.
 
 ---
 
 ## 🔄 Normalisation
 
-### 🔹 1FN — Première Forme Normale
+### 1FN
 
-Toutes les données sont stockées dans une seule table :
+Toutes les données sont regroupées dans une seule table :
 
 ```
 VENTE(IdVente, NomClient, TelClient, AdresseImmeuble, Ville, NumAppartement, Surface, Prix, DateVente)
@@ -70,29 +47,25 @@ VENTE(IdVente, NomClient, TelClient, AdresseImmeuble, Ville, NumAppartement, Sur
 
 ---
 
-### 🔹 2FN — Deuxième Forme Normale
+### 2FN
 
-Séparation en entités :
+Séparation des entités :
 
 * CLIENT
 * IMMEUBLE
 * APPARTEMENT
 * VENTE
 
-✔️ Suppression des dépendances partielles
-
 ---
 
-### 🔹 3FN — Troisième Forme Normale
+### 3FN
 
 Structure finale :
 
-| Table       | Attributs                                                |
-| ----------- | -------------------------------------------------------- |
-| CLIENT      | IdClient, Nom, Telephone                                 |
-| IMMEUBLE    | IdImmeuble, Adresse, Ville                               |
-| APPARTEMENT | IdAppartement, NumAppartement, Surface, Prix, IdImmeuble |
-| VENTE       | IdVente, DateVente, IdClient, IdAppartement              |
+* CLIENT(IdClient, Nom, Telephone)
+* IMMEUBLE(IdImmeuble, Adresse, Ville)
+* APPARTEMENT(IdAppartement, NumAppartement, Surface, Prix, IdImmeuble)
+* VENTE(IdVente, DateVente, IdClient, IdAppartement)
 
 ---
 
@@ -107,7 +80,7 @@ erDiagram
 
 ---
 
-## 🏗️ DDL — Définition des structures
+## 🏗️ DDL
 
 ```sql
 CREATE TABLE Client (
@@ -140,7 +113,7 @@ IdAppartement INT REFERENCES Appartement(IdAppartement)
 
 ---
 
-## 📝 DML — Manipulation des données
+## 📝 DML
 
 ```sql
 INSERT INTO Client VALUES (DEFAULT,'Ali','514000000');
@@ -158,38 +131,33 @@ INSERT INTO Vente VALUES (DEFAULT,'2024-02-15',2,2);
 
 ---
 
-## 🔐 DCL — Contrôle des accès
+## 📸 Captures
 
-```sql
-CREATE USER agent WITH PASSWORD '1234';
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO agent;
-```
+### Tables créées
 
----
+![Tables](images/2.png)
 
-## ⚡ Optimisation
+### Données insérées
 
-Techniques utilisées :
+![Insert](images/3.png)
 
-* Index sur clés étrangères
-* Requêtes optimisées
-* Éviter SELECT *
-* Structure normalisée
+### Résultat SELECT
+
+![Select](images/4.png)
+
+### Requête JOIN
+
+![Join](images/5.png)
 
 ---
 
 ## ✅ Conclusion
 
-Ce projet m’a permis de :
+Ce projet m’a permis de comprendre :
 
-* Comprendre la normalisation (1FN → 3FN)
-* Concevoir une base relationnelle
-* Utiliser SQL efficacement
-* Structurer un projet professionnel
+* La normalisation des bases de données
+* La conception d’un modèle relationnel
+* L’utilisation de SQL
+* L’importance de structurer les données correctement
 
 ---
-
-## 👨‍🎓 Auteur
-
-Mazigh Bareche
-Projet académique – Base de données
