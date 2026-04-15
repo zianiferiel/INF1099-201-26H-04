@@ -1,9 +1,12 @@
 📦 🐘 TP PostgreSQL – Gestion des utilisateurs et permissions (DCL)
+
 🎯 Objectif du TP
 
 Ce TP a pour objectif de comprendre la gestion des utilisateurs et des permissions dans PostgreSQL à l’aide des commandes DCL.
 
+
 Nous avons appris à :
+
 
 créer des utilisateurs
 attribuer des permissions
@@ -12,9 +15,12 @@ retirer des permissions
 supprimer des utilisateurs
 🏋️ Présentation – BorealFit
 
+
 BorealFit est une plateforme de réservation de séances de sport destinée aux étudiants.
 
+
 Elle permet de :
+
 
 réserver des séances
 gérer les activités sportives
@@ -25,9 +31,12 @@ PowerShell
 Docker / Podman
 PostgreSQL 16
 psql
+
+
 1️⃣ Connexion à PostgreSQL
 docker container exec --interactive --tty postgres bash
 psql -U postgres
+
 
 <img width="458" height="66" alt="1" src="https://github.com/user-attachments/assets/839458cd-489f-4040-a98d-e4ec694d5914" />
 
@@ -36,11 +45,15 @@ psql -U postgres
 CREATE DATABASE borealfit;
 \c borealfit
 
+
 <img width="446" height="88" alt="2" src="https://github.com/user-attachments/assets/3c027cd8-d3a2-4c89-92f9-910a70cfc775" />
+
+
 
 
 3️⃣ Création du schéma et de la table
 CREATE SCHEMA tp_dcl;
+
 
 CREATE TABLE tp_dcl.reservation (
     id SERIAL PRIMARY KEY,
@@ -52,6 +65,8 @@ CREATE TABLE tp_dcl.reservation (
 \dt tp_dcl.*
 
 <img width="407" height="206" alt="3" src="https://github.com/user-attachments/assets/f35852ad-f4ab-4ea6-8874-f6fcb965c58e" />
+
+
 
 
 4️⃣ Création des utilisateurs
@@ -130,9 +145,13 @@ DROP USER gestionnaire_borealfit;
 <img width="471" height="156" alt="11" src="https://github.com/user-attachments/assets/7889c287-9673-409c-9e31-3e7692ddf8ea" />
 
 
+
+
 🧾 Conclusion
 
 Dans ce TP, nous avons appris à gérer les utilisateurs et les permissions dans PostgreSQL.
+
+
 
 Les commandes principales utilisées sont :
 
@@ -141,11 +160,17 @@ GRANT
 REVOKE
 DROP USER
 
+
 Ces commandes permettent de sécuriser l’accès aux données.
+
 
 👤 Auteur
 
+
 Nom : Kahil Amine
+
 Numéro étudiant : 300151292
+
 Cours : INF1099
+
 Année : 2026
