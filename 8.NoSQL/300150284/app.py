@@ -1,6 +1,5 @@
 import psycopg2
 import json
-import os
 
 conn = psycopg2.connect(
     dbname="ecole",
@@ -12,7 +11,7 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
-# INSERT
+# 🔹 INSERT
 nouvel_etudiant = {
     "nom": "Diana",
     "age": 28,
@@ -26,14 +25,14 @@ cur.execute(
 
 conn.commit()
 
-# SELECT ALL
+# 🔹 SELECT ALL
 print("\n📌 Tous les étudiants :")
 cur.execute("SELECT data FROM etudiants")
 
 for row in cur.fetchall():
     print(row[0])
 
-# SEARCH
+# 🔹 SEARCH PAR NOM
 print("\n🔎 Recherche Alice :")
 cur.execute("""
     SELECT data FROM etudiants
@@ -42,6 +41,26 @@ cur.execute("""
 
 for row in cur.fetchall():
     print(row[0])
+
+# 🔹 SEARCH PAR COMPETENCE
+print("\n💻 Recherche compétence Python :")
+cur.execute("""
+    SELECT data FROM etudiants
+    WHERE data->'competences' ? 'Python'
+""")
+
+for row in cur.fetchall():
+    print(row[0])
+
+# 🔹 DELETE (bonus)
+cur.execute("""
+    DELETE FROM etudiants
+    WHERE data->>'nom' = 'Bob'
+""")
+
+conn.commit()
+
+print("\n❌ Bob supprimé")
 
 cur.close()
 conn.close()
