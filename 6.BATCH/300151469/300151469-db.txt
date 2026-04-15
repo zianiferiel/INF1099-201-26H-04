@@ -20,17 +20,25 @@ Execution de DDL.sql ...
    CREATE TABLE
 
 Execution de DML.sql ...
-   You are now connected to database "tcf_canada_300151469" as user "postgres".
-   INSERT 0 3
-   INSERT 0 3
-   INSERT 0 3
-   INSERT 0 3
-   INSERT 0 3
+ERROR:  relation "candidat" does not exist
+LINE 1: INSERT INTO candidat (nom, prenom, email, telephone) VALUES
+                    ^
+ERROR:  relation "lieu" does not exist
+LINE 1: INSERT INTO lieu (nom_lieu, adresse) VALUES
+                    ^
+ERROR:  relation "session" does not exist
+LINE 1: INSERT INTO session (date_session, heure_session, type_test,...
+                    ^
+ERROR:  relation "rendezvous" does not exist
+LINE 1: INSERT INTO rendezvous (id_candidat, id_session, statut) VAL...
+                    ^
+ERROR:  relation "paiement" does not exist
+LINE 1: INSERT INTO paiement (montant, mode_paiement, date_paiement,...
+                    ^
 
 Execution de DCL.sql ...
-   You are now connected to database "tcf_canada_300151469" as user "postgres".
+ERROR:  relation "candidat" does not exist
    CREATE ROLE
-   GRANT
    GRANT
 
 Execution de DQL.sql ...
@@ -54,6 +62,6 @@ LINE 1: SELECT * FROM rendezvous WHERE statut = 'Confirme';
                       ^
 
 ========================================
- Chargement termine en 0.8 secondes.
+ Chargement termine en 0.72 secondes.
  Log sauvegarde dans : execution.log
 ========================================
