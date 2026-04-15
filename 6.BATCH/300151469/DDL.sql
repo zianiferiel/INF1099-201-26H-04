@@ -1,10 +1,8 @@
 -- DDL.sql
 -- Auteure : Rabia BOUHALI | Matricule : 300151469
--- Création de la base de données TCF Canada
-
--- CORRECTION : PostgreSQL n'accepte pas "CREATE DATABASE IF NOT EXISTS"
--- La base est créée par le script batch avant l'exécution de ce fichier
-\c tcf_canada_300151469;
+-- Création des tables TCF Canada
+-- NOTE : La base "ecole" est créée automatiquement par Docker
+-- et passée via -d ecole dans load-db.ps1
 
 CREATE TABLE IF NOT EXISTS candidat (
     id_candidat  SERIAL PRIMARY KEY,
