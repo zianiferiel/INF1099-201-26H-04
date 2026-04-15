@@ -1,37 +1,46 @@
-param([string]$Container = "postgres")
+# load-db.ps1
+# Usage : ./load-db.ps1 [nom-du-conteneur]
 
-$Database = "borealfit"
-$User     = "postgres"
-$LogFile  = "execution.log"
-$Files    = @("DDL.sql", "DML.sql", "DCL.sql", "DQL.sql")
+param(
+    [string]$Container = "postgres-lab"
+)
 
-function Write-Log {
-    param([string]$Message)
-    $line = "[$(Get-Date -Format 'HH:mm:ss')] $Message"
-    Write-Output $line
-    Add-Content -Path $LogFile -Value $line
+$Database  = "ecole"
+$User      = "postgres"
+$LogFile   = "execution.log"
+$Files     = "DDL.sql","DML.sql","DCL.sql","DQL.sql"
+
+$StartTime = Get-Date
+"=== Début : $StartTime ===" | Tee-Object -FilePath $LogFile
+
+# Vérification du conteneur
+$containerRunning = docker ps --format "{{.Names}}" | Select-String $Container
+
+if (-not $containerRunning) {
+    $msg = "ERREUR : le conteneur '$Container' n'est pas actif."
+    Write-Output $msg
+    $msg | Out-File -FilePath $LogFile -Append
+    exit
 }
-
-$start = Get-Date
-Write-Log "Demarrage du chargement BorealFit..."
-
-$running = docker ps --format "{{.Names}}" | Select-String $Container
-if (-not $running) {
-    Write-Log "ERREUR : conteneur non actif"
-    exit 1
-}
-
-Write-Log "Creation de la base de donnees..."
-docker exec -i $Container psql -U $User -c "CREATE DATABASE $Database;" 2>$null
 
 foreach ($file in $Files) {
+
     if (-not (Test-Path $file)) {
-        Write-Log "ERREUR : fichier manquant : $file"
-        exit 1
+        $msg = "ERREUR : fichier manquant : $file"
+        Write-Output $msg
+        $msg | Out-File -FilePath $LogFile -Append
+        exit
     }
-    Write-Log "Execution de $file"
-    Get-Content $file | docker exec -i $Container psql -U $User -d $Database
+
+    Write-Output "Execution de $file"
+    "Execution de $file" | Out-File -FilePath $LogFile -Append
+
+    Get-Content $file | docker exec -i $Container psql -U $User -d $Database 2>&1 | Tee-Object -FilePath $LogFile -Append
 }
 
-$duree = ((Get-Date) - $start).TotalSeconds
-Write-Log "Termine en $([math]::Round($duree, 2)) secondes!"
+$EndTime  = Get-Date
+$Duration = ($EndTime - $StartTime).TotalSeconds
+
+$msg = "=== Terminé : $EndTime | Durée : $Duration secondes ==="
+Write-Output $msg
+$msg | Out-File -FilePath $LogFile -Append
