@@ -1,4 +1,4 @@
-ParserError: /Users/valiha/Developer/boreal/INF1099-201-26H-04/6.BATCH/300148210/load-db.ps1:1
+ParserError: /home/runner/work/INF1099-201-26H-04/INF1099-201-26H-04/6.BATCH/300148210/load-db.ps1:1
 Line |
    1 |  <<<<<<< HEAD
      |    ~
