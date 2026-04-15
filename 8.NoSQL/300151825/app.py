@@ -45,4 +45,3 @@ for row in cur.fetchall():
 
 cur.close()
 conn.close()
-"@
