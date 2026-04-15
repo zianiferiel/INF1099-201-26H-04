@@ -8,10 +8,10 @@
 
 -- Étudiants
 INSERT INTO etudiants (nom, age, email) VALUES
-   ('Dubois', 'Lucas', 21, 'lucas.dubois@gmail.com'),
-   ('Martin', 'Sophie', 23, 'sophie.martin@yahoo.com'),
-   ('Nguyen', 'Kevin', 20, 'kevin.nguyen@hotmail.com'),
-   ('Traoré', 'Aminata', 22, 'aminata.traore@gmail.com');
+   ('Dubois', 21, 'lucas.dubois@gmail.com'),
+   ('Martin', 23, 'sophie.martin@yahoo.com'),
+   ('Nguyen', 20, 'kevin.nguyen@hotmail.com'),
+   ('Traoré' 22, 'aminata.traore@gmail.com');
 
 -- Cours
 INSERT INTO cours (nom, credits) VALUES
@@ -19,3 +19,10 @@ INSERT INTO cours (nom, credits) VALUES
     ('Reseaux informatiques',   3),
     ('Systemes exploitation',   3),
     ('Programmation Web',       3);
+
+CREATE TABLE cours (
+    id SERIAL PRIMARY KEY,
+    nom TEXT NOT NULL UNIQUE
+);
+
+INSERT INTO cours (nom, credits)
