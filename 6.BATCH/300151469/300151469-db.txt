@@ -51,6 +51,6 @@ LINE 1: SELECT * FROM rendezvous WHERE statut = 'Confirme';
                       ^
 
 ========================================
- Chargement termine en 0.52 secondes.
+ Chargement termine en 0.49 secondes.
  Log sauvegarde dans : execution.log
 ========================================
