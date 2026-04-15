@@ -111,7 +111,7 @@ pip install -r requirements.txt
 
 Ce projet démontre l’utilisation de PostgreSQL comme base de données NoSQL grâce au support du JSONB. Il permet de manipuler des données flexibles tout en profitant de la puissance des requêtes SQL.
 
-<img src="images/Capture d'écran 2026-04-15 105449.png" width="500"/>
 <img src="images/Capture d'écran 2026-04-15 105550.png" width="500"/>
+<img src="images/Capture d'écran 2026-04-15 105449.png" width="500"/>
 <img src="images/Capture d'écran 2026-04-15 110028.png" width="500"/>
 <img src="images/Capture d'écran 2026-04-15 110430.png" width="500"/>
