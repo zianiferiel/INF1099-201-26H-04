@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 NOTICE:  Etudiant ajouté : Ali
 NOTICE:  Erreur lors de l’ajout : Age invalide pour Bob
 CALL
@@ -13,3 +14,20 @@ DO
   2 | Ajout étudiant : Ali | 2026-04-15 18:36:34.288086
 (2 rows)
 
+=======
+NOTICE:  Etudiant ajouté : Ali
+NOTICE:  Erreur lors de l’ajout : Age invalide pour Bob
+CALL
+DO
+ nombre_etudiants 
+------------------
+                2
+(1 row)
+
+ id |        action        |        date_action         
+----+----------------------+----------------------------
+  1 | Ajout étudiant : Ali | 2026-04-15 19:34:25.451908
+  2 | Ajout étudiant : Ali | 2026-04-15 19:34:25.451908
+(2 rows)
+
+>>>>>>> f650d2d5a543182bc73855a0024af6ff9f85c796

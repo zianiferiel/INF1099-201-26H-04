@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 NOTICE:  Etudiant ajoute avec succes : Nadia
 CALL
 NOTICE:  Inscription reussie
@@ -36,3 +37,43 @@ CALL
   3 | Inscription : alice@email.com -> Bases de donnees | 2026-04-15 18:36:32.617289
 (3 rows)
 
+=======
+NOTICE:  Etudiant ajoute avec succes : Nadia
+CALL
+NOTICE:  Inscription reussie
+ nombre_etudiants_par_age 
+--------------------------
+                        5
+(1 row)
+
+CALL
+ id |  nom  | age |      email      |       date_creation        
+----+-------+-----+-----------------+----------------------------
+  1 | Massi |  21 | massi@email.com | 2026-04-15 19:34:23.326029
+  2 | Alice |  22 | alice@email.com | 2026-04-15 19:34:23.326029
+  3 | Karim |  24 | karim@email.com | 2026-04-15 19:34:23.326029
+  4 | Sofia |  20 | sofia@email.com | 2026-04-15 19:34:23.326029
+  5 | Nadia |  23 | nadia@email.com | 2026-04-15 19:34:23.75758
+(5 rows)
+
+ id |       nom        | credits 
+----+------------------+---------
+  1 | Bases de donnees |       3
+  2 | Programmation    |       4
+  3 | Reseautique      |       3
+  4 | Systemes         |       4
+(4 rows)
+
+ id | etudiant_id | cours_id |     date_inscription      
+----+-------------+----------+---------------------------
+  1 |           2 |        1 | 2026-04-15 19:34:23.75758
+(1 row)
+
+ id |                      action                       |        date_action        
+----+---------------------------------------------------+---------------------------
+  1 | INSERT etudiants                                  | 2026-04-15 19:34:23.75758
+  2 | Ajout etudiant : Nadia (nadia@email.com)          | 2026-04-15 19:34:23.75758
+  3 | Inscription : alice@email.com -> Bases de donnees | 2026-04-15 19:34:23.75758
+(3 rows)
+
+>>>>>>> f650d2d5a543182bc73855a0024af6ff9f85c796

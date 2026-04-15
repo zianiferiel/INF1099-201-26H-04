@@ -1,26 +1,56 @@
 
 ========================================
- Chargement de la base : tcf_canada_300151469
+ Chargement de la base : ecole
  Conteneur             : postgres-lab
 ========================================
 Conteneur actif. Debut du chargement...
 
 Execution de DDL.sql ...
-ERROR:  syntax error at or near "NOT"
-LINE 1: CREATE DATABASE IF NOT EXISTS tcf_canada_300151469;
-                           ^
 \connect: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "tcf_canada_300151469" does not exist
 
 Execution de DML.sql ...
-\connect: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "tcf_canada_300151469" does not exist
+ERROR:  relation "candidat" does not exist
+LINE 1: INSERT INTO candidat (nom, prenom, email, telephone) VALUES
+                    ^
+ERROR:  relation "lieu" does not exist
+LINE 1: INSERT INTO lieu (nom_lieu, adresse) VALUES
+                    ^
+ERROR:  relation "session" does not exist
+LINE 1: INSERT INTO session (date_session, heure_session, type_test,...
+                    ^
+ERROR:  relation "rendezvous" does not exist
+LINE 1: INSERT INTO rendezvous (id_candidat, id_session, statut) VAL...
+                    ^
+ERROR:  relation "paiement" does not exist
+LINE 1: INSERT INTO paiement (montant, mode_paiement, date_paiement,...
+                    ^
 
 Execution de DCL.sql ...
-\connect: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "tcf_canada_300151469" does not exist
+ERROR:  relation "candidat" does not exist
+   CREATE ROLE
+   GRANT
 
 Execution de DQL.sql ...
-\connect: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "tcf_canada_300151469" does not exist
+ERROR:  relation "candidat" does not exist
+LINE 1: SELECT * FROM candidat;
+                      ^
+ERROR:  relation "lieu" does not exist
+LINE 1: SELECT * FROM lieu;
+                      ^
+ERROR:  relation "session" does not exist
+LINE 8: FROM session s
+             ^
+ERROR:  relation "rendezvous" does not exist
+LINE 8: FROM rendezvous r
+             ^
+ERROR:  relation "paiement" does not exist
+LINE 8: FROM paiement p
+             ^
+ERROR:  relation "rendezvous" does not exist
+LINE 1: SELECT * FROM rendezvous WHERE statut = 'Confirme';
+                      ^
 
 ========================================
- Chargement termine en 0.53 secondes.
+ Chargement termine en 0.52 secondes.
  Log sauvegarde dans : execution.log
 ========================================

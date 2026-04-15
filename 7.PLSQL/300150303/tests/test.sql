@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- ==================================================================================
 -- tests/test.sql
 -- TP PostgreSQL : Tests des procédures, fonctions et triggers
@@ -112,3 +113,25 @@ SELECT nombre_etudiants();
 -- Vérifier logs
 SELECT * FROM logs;
 >>>>>>> 0f43d13a6d857fb06ce0359fb8c617a37ec59a23
+=======
+-- Test insertion valide
+CALL ajouter_etudiant('Ali', 22, 'ali@email.com');
+
+-- Test insertion invalide
+DO $$
+BEGIN
+    BEGIN
+        CALL ajouter_etudiant('Bob', 15, 'bob@email.com');
+    EXCEPTION
+        WHEN others THEN
+            RAISE NOTICE 'Erreur attendue OK';
+    END;
+END;
+$$;
+
+-- Test fonction
+SELECT nombre_etudiants();
+
+-- Vérifier logs
+SELECT * FROM logs;
+>>>>>>> f650d2d5a543182bc73855a0024af6ff9f85c796
