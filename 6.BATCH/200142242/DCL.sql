@@ -1,3 +1,0 @@
-CREATE ROLE prof_moodle LOGIN PASSWORD 'prof123';
-GRANT CONNECT ON DATABASE moodle_db TO prof_moodle;
-GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO prof_moodle;
