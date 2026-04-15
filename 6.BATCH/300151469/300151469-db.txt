@@ -1,23 +1,12 @@
 
 ========================================
- Chargement de la base : tcf_canada_300151469
+ Chargement de la base : ecole
  Conteneur             : postgres-lab
 ========================================
-Conteneur actif.
-
-Verification de la base de donnees 'tcf_canada_300151469'...
-   Creation de la base 'tcf_canada_300151469'...
-   Base 'tcf_canada_300151469' creee avec succes.
-
-Debut du chargement des fichiers SQL...
+Conteneur actif. Debut du chargement...
 
 Execution de DDL.sql ...
-   You are now connected to database "tcf_canada_300151469" as user "postgres".
-   CREATE TABLE
-   CREATE TABLE
-   CREATE TABLE
-   CREATE TABLE
-   CREATE TABLE
+\connect: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "tcf_canada_300151469" does not exist
 
 Execution de DML.sql ...
 ERROR:  relation "candidat" does not exist
@@ -62,6 +51,6 @@ LINE 1: SELECT * FROM rendezvous WHERE statut = 'Confirme';
                       ^
 
 ========================================
- Chargement termine en 0.72 secondes.
+ Chargement termine en 0.52 secondes.
  Log sauvegarde dans : execution.log
 ========================================
