@@ -6,9 +6,6 @@
 Conteneur actif. Debut du chargement...
 
 Execution de DDL.sql ...
-ERROR:  syntax error at or near "NOT"
-LINE 1: CREATE DATABASE IF NOT EXISTS tcf_canada_300151469;
-                           ^
 \connect: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "tcf_canada_300151469" does not exist
 
 Execution de DML.sql ...
@@ -21,6 +18,6 @@ Execution de DQL.sql ...
 \connect: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "tcf_canada_300151469" does not exist
 
 ========================================
- Chargement termine en 0.49 secondes.
+ Chargement termine en 0.48 secondes.
  Log sauvegarde dans : execution.log
 ========================================
