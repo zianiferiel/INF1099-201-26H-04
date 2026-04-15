@@ -1,50 +1,73 @@
--- DDL.sql
--- Auteure : Rabia BOUHALI | Matricule : 300151469
--- Création des tables TCF Canada
--- NOTE : La base "ecole" est créée automatiquement par Docker
--- et passée via -d ecole dans load-db.ps1
 
-CREATE TABLE IF NOT EXISTS candidat (
-    id_candidat  SERIAL PRIMARY KEY,
-    nom          VARCHAR(50)  NOT NULL,
-    prenom       VARCHAR(50)  NOT NULL,
-    email        VARCHAR(100) NOT NULL UNIQUE,
-    telephone    VARCHAR(20)
-);
+========================================
+ Chargement de la base : ecole
+ Conteneur             : postgres-lab
+========================================
+Conteneur actif. Debut du chargement...
 
-CREATE TABLE IF NOT EXISTS lieu (
-    id_lieu   SERIAL PRIMARY KEY,
-    nom_lieu  VARCHAR(100) NOT NULL,
-    adresse   VARCHAR(150) NOT NULL
-);
+Execution de DDL.sql ...
+   CREATE TABLE
+   CREATE TABLE
+   CREATE TABLE
+   CREATE TABLE
+   CREATE TABLE
 
-CREATE TABLE IF NOT EXISTS session (
-    id_session     SERIAL PRIMARY KEY,
-    date_session   DATE        NOT NULL,
-    heure_session  TIME        NOT NULL,
-    type_test      VARCHAR(50) NOT NULL,
-    id_lieu        INT         NOT NULL,
-    CONSTRAINT fk_session_lieu
-        FOREIGN KEY (id_lieu) REFERENCES lieu(id_lieu)
-);
+Execution de DML.sql ...
+   INSERT 0 3
+   INSERT 0 3
+   INSERT 0 3
+   INSERT 0 3
+   INSERT 0 3
 
-CREATE TABLE IF NOT EXISTS rendezvous (
-    id_rendezvous  SERIAL PRIMARY KEY,
-    id_candidat    INT         NOT NULL,
-    id_session     INT         NOT NULL,
-    statut         VARCHAR(50) NOT NULL,
-    CONSTRAINT fk_rendezvous_candidat
-        FOREIGN KEY (id_candidat) REFERENCES candidat(id_candidat),
-    CONSTRAINT fk_rendezvous_session
-        FOREIGN KEY (id_session) REFERENCES session(id_session)
-);
+Execution de DCL.sql ...
+   CREATE ROLE
+   GRANT
+   GRANT
 
-CREATE TABLE IF NOT EXISTS paiement (
-    id_paiement    SERIAL PRIMARY KEY,
-    montant        DECIMAL(10,2) NOT NULL,
-    mode_paiement  VARCHAR(50)   NOT NULL,
-    date_paiement  DATE          NOT NULL,
-    id_rendezvous  INT           NOT NULL,
-    CONSTRAINT fk_paiement_rendezvous
-        FOREIGN KEY (id_rendezvous) REFERENCES rendezvous(id_rendezvous)
-);
+Execution de DQL.sql ...
+    id_candidat |   nom   | prenom |          email          | telephone  
+   -------------+---------+--------+-------------------------+------------
+              1 | Bouhali | Rabia  | rabia.bouhali@email.com | 6471111111
+              2 | Ali     | Sami   | sami.ali@email.com      | 6472222222
+              3 | Ben     | Nora   | nora.ben@email.com      | 6473333333
+   (3 rows)
+   
+    id_lieu |      nom_lieu       |                adresse                
+   ---------+---------------------+---------------------------------------
+          1 | Centre TCF Toronto  | 123 Rue Bloor, Toronto
+          2 | Centre TCF Ottawa   | 456 Avenue King, Ottawa
+          3 | Centre TCF Montreal | 789 Boulevard Rene-Levesque, Montreal
+   (3 rows)
+   
+    id_session | date_session | heure_session | type_test  |      nom_lieu       |                adresse                
+   ------------+--------------+---------------+------------+---------------------+---------------------------------------
+             1 | 2026-04-15   | 09:00:00      | TCF Canada | Centre TCF Toronto  | 123 Rue Bloor, Toronto
+             2 | 2026-04-18   | 13:30:00      | TCF Canada | Centre TCF Ottawa   | 456 Avenue King, Ottawa
+             3 | 2026-04-22   | 10:15:00      | TCF Canada | Centre TCF Montreal | 789 Boulevard Rene-Levesque, Montreal
+   (3 rows)
+   
+    id_rendezvous |   nom   | prenom | date_session | heure_session |   statut   
+   ---------------+---------+--------+--------------+---------------+------------
+                1 | Bouhali | Rabia  | 2026-04-15   | 09:00:00      | Confirme
+                2 | Ali     | Sami   | 2026-04-18   | 13:30:00      | En attente
+                3 | Ben     | Nora   | 2026-04-22   | 10:15:00      | Confirme
+   (3 rows)
+   
+    id_paiement | montant | mode_paiement  | date_paiement |   nom   | prenom 
+   -------------+---------+----------------+---------------+---------+--------
+              1 |  150.00 | Carte bancaire | 2026-04-10    | Bouhali | Rabia
+              2 |  150.00 | Virement       | 2026-04-12    | Ali     | Sami
+              3 |  150.00 | Especes        | 2026-04-14    | Ben     | Nora
+   (3 rows)
+   
+    id_rendezvous | id_candidat | id_session |  statut  
+   ---------------+-------------+------------+----------
+                1 |           1 |          1 | Confirme
+                3 |           3 |          3 | Confirme
+   (2 rows)
+   
+
+========================================
+ Chargement termine en 0.52 secondes.
+ Log sauvegarde dans : execution.log
+========================================
