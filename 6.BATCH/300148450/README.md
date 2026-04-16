@@ -73,7 +73,7 @@ docker container run -d `
 ```
 
 **Capture 1 — Lancement du conteneur :**  
-![docker run](1.png)
+![docker run](images/1.png)
 
 ### 🔹 Vérification
 
@@ -82,7 +82,7 @@ docker container ls
 ```
 
 **Capture 2 — Vérification du conteneur actif :**  
-![docker ls](2.png)
+![docker ls](images/2.png)
 
 ---
 
@@ -117,7 +117,7 @@ pwsh ./load-db.ps1 -Container postgres-lab
 ```
 
 **Capture 3 — Exécution complète de `load-db.ps1` :**  
-![load-db execution](3.png)
+![load-db execution](images/3.png)
 
 ---
 
@@ -143,7 +143,7 @@ SELECT * FROM tp_sql.etudiants;
 ```
 
 **Capture 4 — Connexion psql et vérification des données :**  
-![psql verify](4.png)
+![psql verify](images/4.png)
 
 ---
 
@@ -154,7 +154,7 @@ Get-Content ./execution.log
 ```
 
 **Capture 5 — Contenu du fichier `execution.log` :**  
-![execution log](5.png)
+![execution log](images/5.png)
 
 ---
 
