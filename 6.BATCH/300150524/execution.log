@@ -4,3 +4,5 @@
 [20:26:54] Execution de dcl.sql
 [20:26:55] Execution de dql.sql
 [20:26:55] Termine en 4.51 secondes!
+[02:17:43] Demarrage du chargement...
+[02:17:43] ERREUR : conteneur 'postgres-cargorent' non actif!
