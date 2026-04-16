@@ -1,4 +1,4 @@
-===== Début d'exécution : 04/15/2026 23:53:14 =====
+===== Début d'exécution : 04/15/2026 23:58:20 =====
 Exécution de DDL.sql
 Exécution de DDL.sql
 CREATE SCHEMA
@@ -31,8 +31,8 @@ Exécution de DQL.sql
  Diana   |       84.75
 (3 rows)
 
-===== Fin d'exécution : 04/15/2026 23:53:14 =====
-Temps total : 0.4451558 secondes
+===== Fin d'exécution : 04/15/2026 23:58:20 =====
+Temps total : 0.4605532 secondes
 Base de données chargée avec succès.
 Log généré : execution.log
-Temps d'exécution : 0.4451558 secondes
+Temps d'exécution : 0.4605532 secondes
