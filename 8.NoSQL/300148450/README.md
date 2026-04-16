@@ -1,6 +1,6 @@
 # 🧪 TP PostgreSQL — NoSQL avec JSONB
 
-## 👤 Informations de l’étudiant
+## 👤 Informations de l'étudiant
 - **Nom :** Adjaoud Hocine  
 - **Numéro étudiant :** 300148450  
 
@@ -10,7 +10,7 @@
 
 Ce laboratoire a pour objectif de mettre en œuvre un modèle NoSQL dans PostgreSQL en utilisant le type de données **JSONB**.
 
-L’utilisation de JSONB permet de stocker des données semi-structurées tout en bénéficiant des performances et des fonctionnalités d’un SGBD relationnel.
+L'utilisation de JSONB permet de stocker des données semi-structurées tout en bénéficiant des performances et des fonctionnalités d'un SGBD relationnel.
 
 ---
 
@@ -48,6 +48,8 @@ docker run --name postgres-nosql `
   -d postgres
 ```
 
+![1.png](images/1.png)
+
 ---
 
 ## 📄 Initialisation de la base
@@ -66,6 +68,8 @@ Le fichier `init.sql` permet de :
 pip install -r requirements.txt
 ```
 
+![2.png](images/2.png)
+
 ---
 
 ## 🐍 Exécution du script Python
@@ -74,25 +78,27 @@ pip install -r requirements.txt
 python app.py
 ```
 
+![3.png](images/3.png)
+
 ---
 
 ## 🔍 Fonctionnalités implémentées
 
 ### 🔹 INSERT
-Ajout d’un étudiant en format JSON
+Ajout d'un étudiant en format JSON (Diana, 28 ans, DevOps/Kubernetes)
 
 ### 🔹 SELECT
 Affichage de tous les étudiants
 
 ### 🔹 SEARCH
-- recherche par nom  
-- recherche par compétence  
+- recherche par nom (Alice)
+- recherche par compétence (Python)
 
 ### 🔹 UPDATE
-Modification d’une valeur JSON (`age`)
+Modification de l'âge de Bob : 22 → 23
 
 ### 🔹 DELETE
-Suppression d’un étudiant
+Suppression de Charlie
 
 ---
 
@@ -118,6 +124,38 @@ WHERE data->'competences' ? 'Python'
 
 ---
 
+## 📸 Captures d'écran (PowerShell)
+
+### 1. Lancement du conteneur Docker PostgreSQL
+
+![1.png](images/1.png)
+
+### 2. Installation des dépendances Python
+
+![2.png](images/2.png)
+
+### 3. Exécution du script — Opérations CRUD
+
+![3.png](images/3.png)
+
+### 4. Vérification — Données finales dans la base
+
+![4.png](images/4.png)
+
+### 5. Vérification — Index GIN
+
+![5.png](images/5.png)
+
+### 6. Conteneur Docker en cours d'exécution
+
+![6.png](images/6.png)
+
+### 7. Requête SQL — Recherche par compétence
+
+![7.png](images/7.png)
+
+---
+
 ## 📁 Structure du projet
 
 ```text
@@ -127,6 +165,13 @@ WHERE data->'competences' ? 'Python'
 ├── app.py
 ├── requirements.txt
 └── images/
+    ├── 1.png
+    ├── 2.png
+    ├── 3.png
+    ├── 4.png
+    ├── 5.png
+    ├── 6.png
+    └── 7.png
 ```
 
 ---
@@ -167,7 +212,7 @@ Il est particulièrement utile pour :
 
 ## 🧾 Conclusion
 
-Ce TP démontre qu’il est possible d’utiliser PostgreSQL comme une base NoSQL grâce à JSONB.
+Ce TP démontre qu'il est possible d'utiliser PostgreSQL comme une base NoSQL grâce à JSONB.
 
 Cette approche hybride est largement utilisée dans les applications modernes nécessitant flexibilité et performance.
 
