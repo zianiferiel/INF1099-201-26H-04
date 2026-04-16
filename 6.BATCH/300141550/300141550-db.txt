@@ -24,7 +24,7 @@ Execution de DQL.sql
             1 | Mike | Livré
 (1 row)
 
-Temps d'exécution : 00:00:00.4482508
-Temps d'exécution : 00:00:00.4482508
+Temps d'exécution : 00:00:00.4373197
+Temps d'exécution : 00:00:00.4373197
 === Chargement terminé avec succès ===
 === Fin ===
