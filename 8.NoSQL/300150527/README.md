@@ -24,6 +24,8 @@ Construire une mini base de données NoSQL en utilisant :
 └── images/
 ```
 
+<img width="753" height="279" alt="a" src="https://github.com/user-attachments/assets/ff63ba19-bece-4366-9dec-4fe802572b9f" />
+
 ---
 
 ## 🧱 1) Création de la base — `init.sql`
