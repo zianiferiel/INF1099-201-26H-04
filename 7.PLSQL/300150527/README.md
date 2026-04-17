@@ -5,6 +5,19 @@
 Base de données PostgreSQL pour la gestion d'une compagnie aérienne — modélisation relationnelle, DDL, DML, programmation avancée PL/pgSQL et tests automatisés avec Docker.
 
 ---
+## 📌 ✨ Présentation du projet
+
+Ce projet consiste à concevoir et implémenter une **base de données complète pour une compagnie aérienne** en utilisant PostgreSQL.
+
+Il couvre :
+
+* 🧱 Modélisation des données (NF1, NF2, NF3)
+* 🗄️ Création des tables (DDL)
+* 📊 Insertion des données (DML)
+* ⚙️ Programmation avancée (PL/pgSQL)
+* 🧪 Tests automatisés avec Docker
+
+---
 
 ## 📂 Structure du projet
 
@@ -42,6 +55,23 @@ Base de données PostgreSQL pour la gestion d'une compagnie aérienne — modél
 | `Reservation` | Réservations liées aux vols et passagers |
 | `logs` | Journal automatique des actions |
 
+Le système représente plusieurs entités du domaine aérien :
+
+* ✈️ CompagnieAerienne
+* 🛫 Avion
+* 🏢 Terminal / Gate
+* 🛬 Runway
+* 🧭 Vol
+* 👤 Passager
+* 🎫 Reservation / Billet
+* 🧳 Bagage
+* 👷 Personnel / Sécurité
+* 🛠️ Maintenance
+* ⚠️ Incident
+* 🧹 ServiceSol
+* 📄 logs (journal des actions)
+
+
 ---
 
 ## 🗄️ Contenu des fichiers
@@ -56,6 +86,19 @@ Création de toutes les tables avec clés primaires, clés étrangères et contr
 
 ### 🔹 `02-dml.sql` — Données initiales
 
+Les scripts DML permettent d’insérer :
+
+* 1 compagnie aérienne
+* 1 avion
+* 1 terminal + gate
+* 1 piste (runway)
+* 1 vol (Alger → Paris)
+* 1 passager initial
+* 1 réservation + billet
+* Données de sécurité, maintenance, service sol
+
+ex :
+
 - **Compagnie** : Air Algérie (`AH`, Algérie)
 - **Avion** : Boeing 737, capacité 180, fabriqué en 2015
 - **Terminal** : Terminal 1, capacité 500 — **Gate** : G1 — **Runway** : R1 (Disponible)
@@ -68,27 +111,73 @@ Création de toutes les tables avec clés primaires, clés étrangères et contr
 
 ### 🔹 `03-programmation.sql` — Programmation PL/pgSQL
 
-#### ✅ Procédure : `ajouter_passager`
-- Vérifie que le passeport n'est pas vide
-- Insère le passager et ajoute une entrée dans `logs`
-- Gère les erreurs avec `EXCEPTION`
+### 🔹 Procédure : `ajouter_passager`
 
-#### ✅ Procédure : `reserver_vol`
-- Vérifie l'existence du passager et du vol
-- Empêche les doublons et enregistre un log
+* Vérifie que le passeport n’est pas vide
+* Insère un nouveau passager
+* Ajoute une entrée dans `logs`
+* Gère les erreurs avec `EXCEPTION`
 
-#### ✅ Fonction : `nombre_passagers_par_vol`
-- Retourne le nombre de réservations confirmées pour un vol donné
+---
 
-#### ✅ Triggers
-- **Validation du passeport** : bloque l'insertion sans passeport valide
-- **Log automatique sur `Reservation`** : capture INSERT, UPDATE, DELETE
+### 🔹 Fonction : `nombre_passagers_par_vol`
+
+* Retourne le nombre de réservations pour un vol donné
+
+---
+
+### 🔹 Procédure : `reserver_vol`
+
+* Vérifie l’existence du passager
+* Vérifie l’existence du vol
+* Empêche les doublons
+* Insère la réservation
+* Enregistre un log
+
+---
+
+### 🔹 Trigger : validation des passagers
+
+* Empêche l’insertion d’un passager sans passeport
+
+---
+
+### 🔹 Trigger : log automatique sur `Reservation`
+
+* Capture automatiquement :
+
+  * INSERT
+  * UPDATE
+  * DELETE
+* Enregistre les détails (passager, vol, statut)
+
+
 
 ![03-programmation.sql – Procédures, fonctions et triggers](images/5.PNG)
 
 ---
 
 ### 🔹 `tests/test.sql` — Suite de tests
+
+Le fichier `test.sql` couvre :
+
+### ✔️ Cas valides
+
+* Ajout de plusieurs passagers
+* Création de réservations
+* Calcul du nombre de passagers
+
+### ❌ Cas d’erreurs
+
+* Passeport vide
+* Réservation en double
+
+### 📊 Vérifications
+
+* Contenu de `Passager`
+* Contenu de `Reservation`
+* Contenu de `logs`
+
 
 | Test | Résultat attendu |
 |---|---|
