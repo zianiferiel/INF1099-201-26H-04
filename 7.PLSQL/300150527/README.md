@@ -2,51 +2,53 @@
 
 > **INF1099 – Collège Boréal** &nbsp;|&nbsp; Étudiant : `300150527`
 
-Base de données PostgreSQL pour la gestion d'une compagnie aérienne — création des tables, insertion des données, procédures, fonctions et triggers.
+Base de données PostgreSQL pour la gestion d'une compagnie aérienne — modélisation relationnelle, DDL, DML, programmation avancée PL/pgSQL et tests automatisés avec Docker.
 
 ---
 
 ## 📂 Structure du projet
 
-```bash
+```
 300150527/
 │
-├── images/                    # 📸 Captures d'écran
 ├── init/
-│   ├── 01-ddl.sql             # Création des tables
-│   ├── 02-dml.sql             # Insertion des données
-│   └── 03-programmation.sql   # Procédures, fonctions, triggers
+│   ├── 01-ddl.sql              # Création des tables
+│   ├── 02-dml.sql              # Insertion des données
+│   └── 03-programmation.sql    # Procédures, fonctions, triggers
 │
 ├── tests/
-│   └── test.sql               # Tests complets
+│   └── test.sql                # Scénarios de test
+│
+├── images/                     # Captures d'écran
 │
 └── README.md
 ```
 
-> **Structure du projet sur disque**
->
-> ![Structure racine du projet](images/1.PNG)
-> ![Contenu des dossiers init et tests](images/2.PNG)
+![Structure racine du projet](images/1.PNG)
+![Contenu des dossiers init et tests](images/2.PNG)
 
 ---
 
-## 🧱 Contenu des fichiers
+## 🧱 Modèle de données
 
-### 🔹 `01-ddl.sql` — Schéma de la base de données
-
-Création des tables :
-
-| Table | Rôle |
+| Entité | Description |
 |---|---|
-| `logs` | Journal des actions automatiques |
-| `CompagnieAerienne` | Données des compagnies |
+| `CompagnieAerienne` | Données des compagnies (nom, pays, code IATA) |
 | `Avion` | Parc d'avions avec référence compagnie |
-| `Terminal` | Terminaux de l'aéroport |
-| `Gate` | Portes d'embarquement |
-| `Runway` | Pistes avec statut |
-| `Vol` | Vols (départ, arrivée, avion, gate) |
+| `Terminal` / `Gate` | Infrastructure aéroportuaire |
+| `Runway` | Pistes avec statut de disponibilité |
+| `Vol` | Vols avec départ, arrivée, avion et gate |
 | `Passager` | Passagers avec passeport et nationalité |
-| `Reservation` | Réservations liées aux vols |
+| `Reservation` | Réservations liées aux vols et passagers |
+| `logs` | Journal automatique des actions |
+
+---
+
+## 🗄️ Contenu des fichiers
+
+### 🔹 `01-ddl.sql` — Schéma de la base
+
+Création de toutes les tables avec clés primaires, clés étrangères et contraintes.
 
 ![01-ddl.sql – Création des tables](images/3.PNG)
 
@@ -54,12 +56,9 @@ Création des tables :
 
 ### 🔹 `02-dml.sql` — Données initiales
 
-Insertion d'un jeu de données de départ :
-
 - **Compagnie** : Air Algérie (`AH`, Algérie)
 - **Avion** : Boeing 737, capacité 180, fabriqué en 2015
-- **Terminal** : Terminal 1, capacité 500
-- **Gate** : G1 &nbsp;|&nbsp; **Runway** : R1 (Disponible)
+- **Terminal** : Terminal 1, capacité 500 — **Gate** : G1 — **Runway** : R1 (Disponible)
 - **Vol** : AH100 (Alger → Paris)
 - **Passager** : Ali Ahmed, passeport AA12345
 
@@ -69,23 +68,21 @@ Insertion d'un jeu de données de départ :
 
 ### 🔹 `03-programmation.sql` — Programmation PL/pgSQL
 
-#### ✅ Procédures stockées
+#### ✅ Procédure : `ajouter_passager`
+- Vérifie que le passeport n'est pas vide
+- Insère le passager et ajoute une entrée dans `logs`
+- Gère les erreurs avec `EXCEPTION`
 
-| Procédure | Description |
-|---|---|
-| `ajouter_passager` | Ajoute un passager avec validation du passeport et log automatique |
-| `reserver_vol` | Crée une réservation avec contrôle des doublons |
+#### ✅ Procédure : `reserver_vol`
+- Vérifie l'existence du passager et du vol
+- Empêche les doublons et enregistre un log
 
-#### ✅ Fonction
-
-| Fonction | Description |
-|---|---|
-| `nombre_passagers_par_vol(id_vol)` | Retourne le nombre de passagers pour un vol donné |
+#### ✅ Fonction : `nombre_passagers_par_vol`
+- Retourne le nombre de réservations confirmées pour un vol donné
 
 #### ✅ Triggers
-
-- **Validation du passeport** : bloque l'ajout si le passeport est vide ou nul
-- **Logs automatiques** : enregistre chaque opération sur `Reservation`
+- **Validation du passeport** : bloque l'insertion sans passeport valide
+- **Log automatique sur `Reservation`** : capture INSERT, UPDATE, DELETE
 
 ![03-programmation.sql – Procédures, fonctions et triggers](images/5.PNG)
 
@@ -110,14 +107,14 @@ Insertion d'un jeu de données de départ :
 
 ### 1. Démarrer le conteneur PostgreSQL
 
-```bash
-docker run -d \
-  --name tp_postgres \
-  -e POSTGRES_USER=etudiant \
-  -e POSTGRES_PASSWORD=etudiant \
-  -e POSTGRES_DB=tpdb \
-  -p 5432:5432 \
-  -v ${PWD}/init:/docker-entrypoint-initdb.d \
+```powershell
+docker run -d `
+  --name tp_postgres `
+  -e POSTGRES_USER=etudiant `
+  -e POSTGRES_PASSWORD=etudiant `
+  -e POSTGRES_DB=tpdb `
+  -p 5432:5432 `
+  -v ${PWD}/init:/docker-entrypoint-initdb.d `
   postgres:15
 ```
 
@@ -125,7 +122,7 @@ docker run -d \
 
 ### 2. Vérifier que le conteneur est actif
 
-```bash
+```powershell
 docker ps
 ```
 
@@ -133,13 +130,13 @@ docker ps
 
 ### 3. Exécuter les tests
 
-```bash
+```powershell
 Get-Content tests/test.sql | docker exec -i tp_postgres psql -U etudiant -d tpdb
 ```
 
 ### 4. Accès interactif à la base
 
-```bash
+```powershell
 docker container exec -it tp_postgres psql -U etudiant -d tpdb
 ```
 
@@ -171,7 +168,7 @@ docker container exec -it tp_postgres psql -U etudiant -d tpdb
 - ✨ Gestion complète des passagers
 - ✨ Réservation de vols avec contrôle métier
 - ✨ Validation des données via exceptions PL/pgSQL
-- ✨ Logs automatiques via triggers
+- ✨ Logs automatiques via triggers (INSERT / UPDATE / DELETE)
 - ✨ Suite de tests reproductible
 
 ---
@@ -180,9 +177,10 @@ docker container exec -it tp_postgres psql -U etudiant -d tpdb
 
 Ce projet démontre :
 
-- ✔️ Maîtrise de PostgreSQL et du langage PL/pgSQL
-- ✔️ Utilisation des procédures stockées, fonctions et triggers
+- ✔️ Maîtrise du modèle relationnel (NF1, NF2, NF3)
+- ✔️ Utilisation avancée de PostgreSQL et PL/pgSQL
 - ✔️ Gestion robuste des erreurs et des cas limites
+- ✔️ Utilisation des triggers pour l'automatisation
 - ✔️ Déploiement et exécution dans un environnement Docker isolé
 
 ---
