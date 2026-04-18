@@ -1,4 +1,5 @@
 NOTICE:  Etudiant ajouté avec succès : Ali
+NOTICE:  Erreur lors de l'ajout de Bob : Age invalide pour Bob
 CALL
 DO
  nombre_etudiants 
@@ -8,8 +9,7 @@ DO
 
  id |           action           |        date_action         
 ----+----------------------------+----------------------------
-  1 | INSERT sur etudiants : Ali | 2026-04-18 00:20:04.566631
-  2 | Ajout étudiant : Ali       | 2026-04-18 00:20:04.566631
+  1 | INSERT sur etudiants : Ali | 2026-04-18 00:23:20.557229
+  2 | Ajout étudiant : Ali       | 2026-04-18 00:23:20.557229
 (2 rows)
 
-NOTICE:  Erreur lors de l'ajout de Bob : Age invalide pour Bob
