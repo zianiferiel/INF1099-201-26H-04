@@ -321,7 +321,8 @@ Deux rôles sont créés pour sécuriser l'accès à la base de données :
 
 Lors du premier `DROP ROLE`, PostgreSQL refuse car les rôles possèdent encore des droits sur les tables du schéma :
 
-![ERREUR DROP ROLE — user_read et user_admin ne peuvent pas être supprimés car droits sur les 15 tables du schéma aeroport](images/19_1.PNG)
+<img width="1155" height="599" alt="19 1" src="https://github.com/user-attachments/assets/4d23fb5f-8de9-40c7-be84-1a91b48a4ddd" />
+
 
 > ⚠️ **Problème :** Les rôles ont encore des privilèges actifs sur les tables.  
 > **Solution :** Exécuter `REVOKE` sur toutes les tables avant `DROP ROLE`.
@@ -356,7 +357,8 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA aeroport
     GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO user_admin;
 ```
 
-![GRANT USAGE + SELECT + INSERT/UPDATE/DELETE + SEQUENCES + ALTER DEFAULT PRIVILEGES](images/19_2.PNG)
+<img width="679" height="515" alt="19 2" src="https://github.com/user-attachments/assets/e019825f-3b38-4303-aa56-f2f21df83c8b" />
+
 
 ---
 
@@ -375,7 +377,8 @@ INSERT INTO aeroport.Passager ...;          -- ✅ INSERT 0 1
 RESET ROLE;
 ```
 
-![Test SET ROLE user_read — SELECT OK + INSERT ERREUR droit refusé / SET ROLE user_admin — INSERT OK + RESET ROLE + début REVOKE](images/19_3.PNG)
+<img width="1076" height="698" alt="19 3" src="https://github.com/user-attachments/assets/27c6aee9-6e5c-4907-83a8-ebaccf95cda2" />
+
 
 ---
 
@@ -410,7 +413,8 @@ REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA aeroport FROM user_admin;
 DROP ROLE user_admin;  -- ✅ DROP ROLE
 ```
 
-![REVOKE complet séquences + DROP ROLE user_read OK + ERREUR séquences user_admin + REVOKE SEQUENCES + DROP ROLE user_admin OK](images/19_4.PNG)
+<img width="1071" height="658" alt="19 4" src="https://github.com/user-attachments/assets/7cbea0c2-74fd-4719-828f-dca6c64e44ee" />
+
 
 > ✅ Les deux rôles sont supprimés avec succès après résolution complète de toutes les dépendances.
 
