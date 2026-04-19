@@ -4,8 +4,8 @@ NOTICE:  Erreur lors de l'ajout de "Sara" : Adresse courriel invalide pour Sara 
 NOTICE:  Erreur : l'adresse "ali@email.com" est déjà enregistrée dans la base.
 CALL
 DO
-NOTICE:  Nombre d'étudiants entre 18 et 25 ans : 2
 DO
+NOTICE:  Nombre d'étudiants entre 18 et 25 ans : 2
 DO
 NOTICE:  Erreur attendue OK : Plage d'âge invalide : min (30) ne peut pas être supérieur à max (20)
  nombre_etudiants_par_age 
@@ -14,9 +14,9 @@ NOTICE:  Erreur attendue OK : Plage d'âge invalide : min (30) ne peut pas être
 (1 row)
 
 DO
- id |                action                |       date_action        
-----+--------------------------------------+--------------------------
-  1 | INSERT sur etudiants — nouveau : Ali | 2026-04-19 06:13:24.0244
-  2 | Ajout étudiant : Ali (ali@email.com) | 2026-04-19 06:13:24.0244
+ id |                action                |        date_action         
+----+--------------------------------------+----------------------------
+  1 | INSERT sur etudiants — nouveau : Ali | 2026-04-19 07:00:45.162715
+  2 | Ajout étudiant : Ali (ali@email.com) | 2026-04-19 07:00:45.162715
 (2 rows)
 
